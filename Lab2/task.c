@@ -20,7 +20,7 @@ void LEDTask (void *pvParameters) {
 void BTNTask (void *pvParameters) {
 	for ( ;; ) {
 		if ((GPIOC->IDR & 0x00002000 ) == 0) {
-			for (volatile int i = 0; i < 15000; i++);
+			for (volatile int i = 0; i < 45000; i++);
 			if ((GPIOC->IDR & 0x00002000) == 0) {
 				if (LEDState)
 					LEDState = 0;
@@ -34,11 +34,13 @@ void BTNTask (void *pvParameters) {
 void TIM4_IRQHandler() {
 	if ((TIM4->SR & TIM_SR_CC1IF) != 0) {
 		//set DAC output according to the lookup table
-		DAC->DHR12R2 = sinLUT[index];
+		DAC->DHR12R1 &= 0xFFFFF000;
+		DAC->DHR12R1 |= sinLUT[index];
+		DAC->SWTRIGR |= DAC_SWTRIGR_SWTRIG1;
 		
 		//increment the lookup table index
 		index += LEDState;
-		if (index >= 63) {
+		if (index >= 64) {
 			index = 0;
 		}
 		
@@ -59,19 +61,19 @@ void DACSetup() {
 	DAC->CR &= ~(DAC_CR_EN1 | DAC_CR_EN2);
 	
 	//DAC mode control to buffered external
-	DAC->MCR &= ~(7U<<16);
+	DAC->MCR &= ~DAC_MCR_MODE1;
 	
-	//enable trigger for DAC channel 2
-	DAC->CR |= DAC_CR_TEN2;
+	//enable trigger for DAC channel 1
+	DAC->CR |= DAC_CR_TEN1;
 	
-	//clear trigger selection for channel 2
-	DAC->CR &= ~DAC_CR_TSEL2;
+	//clear trigger selection for channel 1
+	DAC->CR |= DAC_CR_TSEL1;
 	
-	//select timer 4 as trigger for DAC channel 2
-	DAC->CR |= (DAC_CR_TSEL2_0 | DAC_CR_TSEL2_2);
+	//select timer 4 as trigger for DAC channel 1
+	//DAC->CR |= (DAC_CR_TSEL1_0 | DAC_CR_TSEL1_2);
 	
-	//enable DAC channel 2
-	DAC->CR |= DAC_CR_EN2;
+	//enable DAC channel 1
+	DAC->CR |= DAC_CR_EN1;
 }
 
 void TIM4Setup() {
@@ -88,21 +90,37 @@ void TIM4Setup() {
 	TIM4->SR = 0;
 	TIM4->CNT = 0;
 	
-	//set division rate for 440Hz
-	TIM4->PSC = 0;
-	TIM4->ARR = 141;
+	//set edge align mode
+	TIM4->CR1 &= ~TIM_CR1_CMS;
 	
 	//select up counting
 	TIM4->CR1 &= ~TIM_CR1_DIR;
 	
-	//enable update interrupts
+	//set update event as trigger output
+	TIM4->CR2 &= ~TIM_CR2_MMS;
+	TIM4->CR2 |= TIM_CR2_MMS_1;
+		
+	//enable update and trigger interrupts
+	TIM4->DIER |= TIM_DIER_TIE;
 	TIM4->DIER |= TIM_DIER_UIE;
+	
+	//set division rate for 440Hz
+	TIM4->PSC = 7;
+	TIM4->ARR = 70;
+	
+	//set duty cycle
+	TIM4->CCR1 = 35;
+	TIM4->CCER |= TIM_CCER_CC1E;
+	
+	//
+	TIM4->CCMR1 &= ~TIM_CCMR1_OC1M;
+	TIM4->CCMR1 |= (TIM_CCMR1_OC1M_1 | TIM_CCMR1_OC1M_2);
+		
+	//enable the counter
+	TIM4->CR1 |= TIM_CR1_CEN;
 	
 	//enable timer 4 interrupt
 	NVIC_EnableIRQ(TIM4_IRQn);
-	
-	//enable the counter
-	TIM4->CR1 |= TIM_CR1_CEN;
 }
 
 /*

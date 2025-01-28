@@ -4,6 +4,7 @@
 
 extern const uint16_t sinLUT[];
 extern volatile int LEDState;
+extern volatile int index;
 void LEDTask (void *pvParameters);
 void BTNTask (void *pvParameters);
 //void SINTask (void *pvParameters);
