@@ -5,8 +5,7 @@
 #include "queue.h"
 
 extern QueueHandle_t xQueueLED;
-extern QueueHandle_t xQueueIDX;
-//extern const uint16_t sinLUT[];
+extern const uint16_t sinLUT[];
 void LEDTask (void *pvParameters);
 void BTNTask (void *pvParameters);
 void TIM4_IRQHandler(void);

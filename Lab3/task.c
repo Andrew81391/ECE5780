@@ -3,7 +3,8 @@
 #include "stm32l476xx.h"
 
 extern QueueHandle_t xQueueLED;
-extern QueueHandle_t xQueueIDX;
+extern QueueHandle_t xQueueUART;
+extern const uint16_t sinLUT[];
 
 void LEDTask (void *pvParameters) {
 	for ( ;; ) {
@@ -26,18 +27,16 @@ void BTNTask (void *pvParameters) {
 		BaseType_t status = xQueuePeek(xQueueLED, &LEDState, 0);
 		if (status == pdPASS) {
 			if ((GPIOC->IDR & 0x00002000 ) == 0) {
-				for (volatile int i = 0; i < 15000; i++);
+				for (volatile int i = 0; i < 25000; i++);
 				if ((GPIOC->IDR & 0x00002000) == 0) {
-					status = xQueueReceive(xQueueLED, &LEDState, 0);
-					if (status == pdPASS) {
-						if (LEDState) {
-							LEDState = 0;
-							xQueueSendToBack(xQueueLED, &LEDState, 0);
-						}
-						else {
-							LEDState = 1;
-							xQueueSendToBack(xQueueLED, &LEDState, 0);
-						}
+					xQueueReceive(xQueueLED, &LEDState, 0);
+					if (LEDState) {
+						LEDState = 0;
+						xQueueSendToBack(xQueueLED, &LEDState, 0);
+					}
+					else {
+						LEDState = 1;
+						xQueueSendToBack(xQueueLED, &LEDState, 0);
 					}
 				}
 			}
@@ -47,20 +46,42 @@ void BTNTask (void *pvParameters) {
 
 void TIM4_IRQHandler() {
 	static int32_t index = 0;
-	if ((TIM4->SR & TIM_SR_CC1IF) != 0) {
-		const uint16_t sinLUT[] = {
-		0x05DC,0x063E,0x069F,0x06FE,0x075B,0x07B3,0x0808,
-		0x0856,0x089F,0x08E1,0x091B,0x094E,0x0978,0x0999,
-		0x09B1,0x09BF,0x09C4,0x09BF,0x09B1,0x0999,0x0978,
-		0x094E,0x091B,0x08E1,0x089F,0x0856,0x0808,0x07B3,
-		0x075B,0x06FE,0x069F,0x063E,0x05DC,0x057A,0x0519,
-		0x04BA,0x045D,0x0405,0x03B0,0x0362,0x0319,0x02D7,
-		0x029D,0x026A,0x0240,0x021F,0x0207,0x01F9,0x01F4,
-		0x01F9,0x0207,0x021F,0x0240,0x026A,0x029D,0x02D7,
-		0x0319,0x0362,0x03B0,0x0405,0x045D,0x04BA,0x0519,
-		0x057A };
+	if ((TIM4->SR & TIM_SR_CC1IF) != 0) {	
 		
-		int32_t LEDState = 0;
+		//get note from uart queue
+		if (uxQueueMessagesWaitingFromISR(xQueueUART) != 0) {
+			char note;
+			xQueueReceiveFromISR(xQueueUART, &note, 0);
+			switch (note) {
+				case 'a':
+					TIM4->ARR = 141;
+					break;
+				case 'b':
+					TIM4->ARR = 126;
+					break;
+				case 'c':
+					TIM4->ARR = 118;
+					break;
+				case 'd':
+					TIM4->ARR = 105;
+					break;
+				case 'e':
+					TIM4->ARR = 94;
+					break;
+				case 'f':
+					TIM4->ARR = 88;
+					break;
+				case 'g':
+					TIM4->ARR = 79;
+					break;
+				case 'h':
+					TIM4->ARR = 70;
+					break;
+			}
+		}
+		
+		
+		int32_t LEDState;
 		BaseType_t status1 = xQueuePeekFromISR(xQueueLED, &LEDState);
 		
 		if (status1 == pdPASS){
@@ -70,7 +91,9 @@ void TIM4_IRQHandler() {
 			DAC->SWTRIGR |= DAC_SWTRIGR_SWTRIG1;
 			
 			//increment the lookup table index
-			index += LEDState;
+			if (LEDState) {
+				index += 1;
+			}
 			if (index >= 64) {
 				index = 0;
 			}
@@ -137,8 +160,8 @@ void TIM4Setup() {
 	TIM4->DIER |= TIM_DIER_UIE;
 	
 	//set division rate for 440Hz
-	TIM4->PSC = 7;
-	TIM4->ARR = 70;
+	TIM4->PSC = 3;
+	TIM4->ARR = 141;
 	
 	//set duty cycle
 	TIM4->CCR1 = 35;
