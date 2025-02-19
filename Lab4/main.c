@@ -6,6 +6,7 @@
 
 QueueHandle_t xQueueLED = NULL;
 QueueHandle_t xQueueUART = NULL;
+QueueHandle_t xQueueSENSOR = NULL;
 
 const uint16_t sinLUT[] = {
 		0x05DC,0x063E,0x069F,0x06FE,0x075B,0x07B3,0x0808,
@@ -40,14 +41,15 @@ int main (void) {
 	//run dac and timer setup
 	DACSetup();
 	TIM4Setup();
+	USART_Init_US100();
 	USART_Init_PC();
-   USART_Init_US100();
-	
+  
 	//create queues
 	xQueueLED = xQueueCreate(1, sizeof(int32_t));
 	xQueueUART = xQueueCreate(1, sizeof(char));
+	xQueueSENSOR = xQueueCreate(5, sizeof(char));
 
-	if ((xQueueLED != NULL)/* && (xQueueIDX != NULL)*/) {
+	if ((xQueueLED != NULL) && (xQueueUART != NULL) && (xQueueSENSOR != NULL)) {
 		//register tasks
 		xTaskCreate(
 			LEDTask,
@@ -62,6 +64,15 @@ int main (void) {
 			BTNTask,
 			"BTNTask",
 			32,
+			NULL,
+			1,
+			NULL
+		);
+		
+		xTaskCreate(
+			SENSORTask,
+			"SENSORTask",
+			192,
 			NULL,
 			1,
 			NULL

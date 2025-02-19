@@ -1,9 +1,11 @@
 #include "task.h"
 #include "queue.h"
 #include "stm32l476xx.h"
+#include <stdio.h>
 
 extern QueueHandle_t xQueueLED;
 extern QueueHandle_t xQueueUART;
+extern QueueHandle_t xQueueSENSOR;
 extern const uint16_t sinLUT[];
 
 void LEDTask (void *pvParameters) {
@@ -38,6 +40,42 @@ void BTNTask (void *pvParameters) {
 						LEDState = 1;
 						xQueueSendToBack(xQueueLED, &LEDState, 0);
 					}
+				}
+			}
+		}
+	}
+}
+
+void SENSORTask (void *pvParameters) {
+	for ( ;; ) {
+		char com;
+		BaseType_t status = xQueueReceive(xQueueSENSOR, &com, 0);
+		if (status == pdPASS) {
+			if (com == 't') {
+				USART3->TDR = 0x50;
+				while (USART3->ISR & USART_ISR_RXNE);
+				char temp = (char)USART3->RDR;
+				temp = (9/5) * temp + 32;
+				char tempString[15];
+				sprintf(tempString, "%d deg F\r\n", temp);
+				for (int i=0; tempString[i] != NULL; i++) {
+					while (USART2->ISR & USART_ISR_TXE);
+					USART2->TDR = tempString[i];
+				}
+			}
+			else {
+				USART3->TDR = 0x55;
+				int prox;
+				while (USART3->ISR & USART_ISR_RXNE);
+				prox = (USART3->RDR) << 8;
+				while (USART3->ISR & USART_ISR_RXNE);
+				prox |= USART3->RDR;
+				prox = (int)(prox/25.4);
+				char proxString[15];
+				sprintf(proxString, "%d inches\r\n", prox);
+				for (int i=0; proxString[i] != NULL; i++) {
+					while (USART2->ISR & USART_ISR_TXE);
+					USART2->TDR = proxString[i];
 				}
 			}
 		}

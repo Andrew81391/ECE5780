@@ -6,11 +6,18 @@
 #include "queue.h"
 
 extern QueueHandle_t xQueueUART;
+extern QueueHandle_t xQueueSENSOR;
 
 void USART2_IRQHandler(void){
 	if ((USART2->ISR & USART_ISR_RXNE)){
 		char note = (char)USART2->RDR;
-		xQueueSendToBackFromISR(xQueueUART, &note, 0);
+		if ((note == 'p') || (note == 't')) {
+			BaseType_t status = xQueueSendToBackFromISR(xQueueSENSOR, &note, 0);
+			//while (status != pdPASS);
+		}
+		else {
+			xQueueSendToBackFromISR(xQueueUART, &note, 0);
+		}
 	}
 }
 

@@ -15,7 +15,7 @@
 ".\objects\queue.o"
 ".\objects\tasks.o"
 ".\objects\timers.o"
---ro-base 0x08000000 --entry 0x08000000 --rw-base 0x20000000 --entry Reset_Handler --first __Vectors --strict
+--strict --scatter ".\Objects\Lab1.sct"
 --diag_suppress=L6314W --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list ".\Listings\Lab1.map" -o .\Objects\Lab1.axf
