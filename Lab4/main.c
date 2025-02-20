@@ -41,7 +41,7 @@ int main (void) {
 	//run dac and timer setup
 	DACSetup();
 	TIM4Setup();
-	USART_Init_US100();
+	//USART_Init_US100();
 	USART_Init_PC();
   
 	//create queues
@@ -54,7 +54,7 @@ int main (void) {
 		xTaskCreate(
 			LEDTask,
 			"LEDTask",
-			32,
+			128,
 			NULL,
 			1,
 			NULL
@@ -63,7 +63,7 @@ int main (void) {
 		xTaskCreate(
 			BTNTask,
 			"BTNTask",
-			32,
+			128,
 			NULL,
 			1,
 			NULL
@@ -72,9 +72,9 @@ int main (void) {
 		xTaskCreate(
 			SENSORTask,
 			"SENSORTask",
-			192,
+			256,
 			NULL,
-			1,
+			2,
 			NULL
 		);
 		

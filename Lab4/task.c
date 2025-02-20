@@ -1,7 +1,9 @@
 #include "task.h"
 #include "queue.h"
 #include "stm32l476xx.h"
+#include "FreeRTOS.h"
 #include <stdio.h>
+
 
 extern QueueHandle_t xQueueLED;
 extern QueueHandle_t xQueueUART;
@@ -49,32 +51,36 @@ void BTNTask (void *pvParameters) {
 void SENSORTask (void *pvParameters) {
 	for ( ;; ) {
 		char com;
-		BaseType_t status = xQueueReceive(xQueueSENSOR, &com, 0);
+		BaseType_t status = xQueueReceive(xQueueSENSOR, &com, portMAX_DELAY);
 		if (status == pdPASS) {
 			if (com == 't') {
+				while (!(USART3->ISR & USART_ISR_TXE));
 				USART3->TDR = 0x50;
-				while (USART3->ISR & USART_ISR_RXNE);
-				char temp = (char)USART3->RDR;
-				temp = (9/5) * temp + 32;
+				for (volatile int i =0; i<500; i++);
+				while (!(USART3->ISR & USART_ISR_RXNE));
+				char temp = ((char)USART3->RDR)-45;
+				temp = (9.0/5.0) * temp + 27;
 				char tempString[15];
 				sprintf(tempString, "%d deg F\r\n", temp);
 				for (int i=0; tempString[i] != NULL; i++) {
-					while (USART2->ISR & USART_ISR_TXE);
+					while ((USART2->ISR & USART_ISR_TXE)!=USART_ISR_TXE);
 					USART2->TDR = tempString[i];
 				}
 			}
 			else {
+				while (!(USART3->ISR & USART_ISR_TXE));
 				USART3->TDR = 0x55;
+				for (volatile int i =0; i<500; i++);
 				int prox;
-				while (USART3->ISR & USART_ISR_RXNE);
+				while (!(USART3->ISR & USART_ISR_RXNE));
 				prox = (USART3->RDR) << 8;
-				while (USART3->ISR & USART_ISR_RXNE);
+				while (!(USART3->ISR & USART_ISR_RXNE));
 				prox |= USART3->RDR;
 				prox = (int)(prox/25.4);
 				char proxString[15];
 				sprintf(proxString, "%d inches\r\n", prox);
 				for (int i=0; proxString[i] != NULL; i++) {
-					while (USART2->ISR & USART_ISR_TXE);
+					while ((USART2->ISR & USART_ISR_TXE)!=USART_ISR_TXE);
 					USART2->TDR = proxString[i];
 				}
 			}
@@ -115,7 +121,15 @@ void TIM4_IRQHandler() {
 				case 'h':
 					TIM4->ARR = 70;
 					break;
-			}
+				case 't':
+					xQueueSendToBackFromISR(xQueueSENSOR, &note, 3);
+					
+					break;
+				case 'p':
+					xQueueSendToBackFromISR(xQueueSENSOR, &note, 3);
+	
+					break;
+			}	
 		}
 		
 		
