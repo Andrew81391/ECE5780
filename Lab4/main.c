@@ -46,7 +46,7 @@ int main (void) {
   
 	//create queues
 	xQueueLED = xQueueCreate(1, sizeof(int32_t));
-	xQueueUART = xQueueCreate(1, sizeof(char));
+	xQueueUART = xQueueCreate(5, sizeof(char));
 	xQueueSENSOR = xQueueCreate(5, sizeof(char));
 
 	if ((xQueueLED != NULL) && (xQueueUART != NULL) && (xQueueSENSOR != NULL)) {

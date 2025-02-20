@@ -33,14 +33,13 @@ void BTNTask (void *pvParameters) {
 			if ((GPIOC->IDR & 0x00002000 ) == 0) {
 				for (volatile int i = 0; i < 25000; i++);
 				if ((GPIOC->IDR & 0x00002000) == 0) {
-					xQueueReceive(xQueueLED, &LEDState, 0);
 					if (LEDState) {
 						LEDState = 0;
-						xQueueSendToBack(xQueueLED, &LEDState, 0);
+						xQueueOverwrite(xQueueLED, &LEDState);
 					}
 					else {
 						LEDState = 1;
-						xQueueSendToBack(xQueueLED, &LEDState, 0);
+						xQueueOverwrite(xQueueLED, &LEDState);
 					}
 				}
 			}
@@ -91,7 +90,7 @@ void SENSORTask (void *pvParameters) {
 void TIM4_IRQHandler() {
 	static int32_t index = 0;
 	if ((TIM4->SR & TIM_SR_CC1IF) != 0) {	
-		
+		BaseType_t xHigherPriorityTaskWoken = pdFALSE;
 		//get note from uart queue
 		if (uxQueueMessagesWaitingFromISR(xQueueUART) != 0) {
 			char note;
@@ -121,14 +120,16 @@ void TIM4_IRQHandler() {
 				case 'h':
 					TIM4->ARR = 70;
 					break;
-				case 't':
-					xQueueSendToBackFromISR(xQueueSENSOR, &note, 3);
-					
+				case 't': {
+					xQueueSendToBackFromISR(xQueueSENSOR, &note, &xHigherPriorityTaskWoken);
+					portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 					break;
-				case 'p':
-					xQueueSendToBackFromISR(xQueueSENSOR, &note, 3);
-	
+				}
+				case 'p': {
+					xQueueSendToBackFromISR(xQueueSENSOR, &note, &xHigherPriorityTaskWoken);
+					portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 					break;
+				}
 			}	
 		}
 		

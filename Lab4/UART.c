@@ -17,7 +17,7 @@ void USART2_IRQHandler(void){
 //			portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 //		}
 		//else {
-			xQueueSendToBackFromISR(xQueueUART, &note, 0);
+			xQueueSendToBackFromISR(xQueueUART, &note, NULL);
 		//}
 	}
 }
