@@ -42,7 +42,7 @@ void readInputFile(const string& filename, vector<taskPeriodic>& periodic_tasks,
             string id;
             int exec_time, release_time;
             parseTaskLine(line, id, exec_time, release_time);
-            aperiodic_tasks.emplace_back(id, exec_time, 0, release_time, false);
+            aperiodic_tasks.emplace_back(id, exec_time, 500, release_time, false);
         }
     }
 }

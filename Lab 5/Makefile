@@ -5,7 +5,7 @@ CC = g++
 CFLAGS = -Wall -g
 
 # Source files
-SRCS = main.cpp task.cpp input.cpp
+SRCS = main.cpp task.cpp input.cpp edf.cpp
 
 # Object files
 OBJS = $(SRCS:.c=.o)
