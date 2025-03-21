@@ -17,6 +17,9 @@ public:
     int32_t period;        // Set to 0 if aperiodic
     int32_t release_time;  // Set to 0 if periodic
     bool is_periodic;
+	int32_t missed_deadlines;
+	int32_t preemptions;
+	int32_t next_deadline;
 
     taskPeriodic(std::string id, int32_t e, int32_t p, int32_t r, bool periodic);
 };

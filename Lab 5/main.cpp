@@ -34,6 +34,14 @@ int main(int argc, char* argv[]) {
     for (const auto& task : aperiodic_tasks) {
         cout << task.ID << ": Exec Time = " << task.exec_time << ", Release Time = " << task.release_time << "\n";
     }
-
+	
+	
+	//Solve for RM
+	
+	//Solve for EDF
+	
+	//Solve for LLF
+	
+	
     return 0;
 }
