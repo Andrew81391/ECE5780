@@ -10,90 +10,73 @@ void simulateEDF(std::vector<taskPeriodic> taskP, std::vector<taskPeriodic> task
 	all_tasks.insert(all_tasks.end(), taskNP.begin(), taskNP.end());
 	//we need to keep track of the currently running task.
 	int32_t index_of_current_task=-1;
-
+	bool task_finished=false;
 	
-	// //loop once per ms(basic time unit)
-	// for (int sys_time=0; sys_time<run_time; sys_time++){
-	// 	//check which task has the earliest deadline.  Inefficient but I cannot be assed to do better right now
-	// 	int32_t earliest_index = -1;
-	// 	int32_t earliest_deadline = INT32_MAX;
-	// 	//find the earliest deadline task for this systime interval
-	// 	for (int32_t i = 0; i<all_tasks.size();i++){
-	// 		//select a task.  use .at() for safety
-	// 		const auto& task = all_tasks.at(i);
-	// 		//check if task is valid for running
-	// 		if (task.is_periodic || (task.release_time <= sys_time)){
-	// 			//test if this task is more important
-	// 			if (task.next_deadline < earliest_deadline){
-	// 				//update values
-	// 				earliest_deadline = task.next_deadline;
-	// 				earliest_index = i;
-	// 			}
-	// 		}
-	// 	}//earliest_index now has the index of the task w/ closest deadline
-	//TODO: handle the switching of tasks based on the next priority task
-
-
-	//TODO: handle the updating of next deadline values within a task
+	//loop once per ms(basic time unit)
 	for (sys_time = 0; sys_time < run_time; sys_time++) {
 		int32_t earliest_index = -1;
 		int32_t earliest_deadline = INT32_MAX;
-
 		// Find the task with the earliest deadline that's ready to run
-		for (int32_t i = 0; i < all_tasks.size(); i++) {
+		for (uint32_t i = 0; i < all_tasks.size(); i++) {
 			auto& task = all_tasks[i];
-
 			// Skip finished aperiodic tasks
 			if (!task.is_periodic && task.progress_left <= 0) continue;
-
-			// Periodic or released aperiodic
 			if (task.is_periodic || (task.release_time <= sys_time)) {
-				if (task.next_deadline < earliest_deadline && task.progress_left > 0) {
+				if (task.next_deadline < earliest_deadline && (task.progress_left > 0)) {
 					earliest_deadline = task.next_deadline;
 					earliest_index = i;
 				}
 			}
 		}
-
-		// Preemption detection
-		if (index_of_current_task != -1 && index_of_current_task != earliest_index) {
+		// Log preemption
+		if (index_of_current_task != -1 && (index_of_current_task != earliest_index) && (!task_finished)) {
 			all_tasks[index_of_current_task].preemptions++;
+			cout << "[" << sys_time << " ms] Preempted task: " << all_tasks[index_of_current_task].ID << endl;
+		}
+		// Log start of new task
+		if (earliest_index != -1 && index_of_current_task != earliest_index) {
+			cout << "[" << sys_time << " ms] Starting task: " << all_tasks[earliest_index].ID << endl;
 		}
 		index_of_current_task = earliest_index;
-
-		// Execute the current task
+		// Execute the selected task
 		if (index_of_current_task != -1) {
 			auto& task = all_tasks[index_of_current_task];
 			task.progress_left--;
-
-			// If the task just completed
+			//did the task finish
 			if (task.progress_left == 0) {
-				if (task.is_periodic) {
+				cout << "[" << sys_time << " ms] Finished task: " << task.ID << endl;
+				/*if (task.is_periodic) {
 					task.next_deadline += task.period;
 					task.progress_left = task.exec_time;
 				}
-				// aperiodic stays at 0
+					*/
+				task_finished=true;
+			} else {
+				task_finished=false;
 			}
+		} else {
+			cout << "[" << sys_time << " ms] CPU Idle\n";
 		}
-
-		// Check for deadline misses
-		for (auto& task : all_tasks) {
-			if (task.is_periodic && sys_time == task.next_deadline) {
+		// Check for end of period
+		for (auto& task : all_tasks) {//check each task
+			if (sys_time == (task.next_deadline-1)) {
+				//check for missed deadline
 				if (task.progress_left > 0) {
 					task.missed_deadlines++;
-					// reset task
-					task.progress_left = task.exec_time;
+					//kill late tasks
+					task_finished=true;
+					cout << "[" << sys_time << " ms] Missed deadline: " << task.ID << endl;
+					
 				}
-				task.next_deadline += task.period;
+				if (task.is_periodic){
+					//reset task, stops task from running multiple times in its period.
+					task.progress_left = task.exec_time;
+					task.next_deadline += task.period;
+				} //for aperodic tasks missing deadline=death
+				else {
+					task.progress_left=0;
+				}
 			}
 		}
-	}
-
-	// Optional: print stats
-	for (const auto& task : all_tasks) {
-		cout << task.ID << " | Missed Deadlines: " << task.missed_deadlines
-		     << " | Preemptions: " << task.preemptions << endl;
-	}
-
 	}
 }

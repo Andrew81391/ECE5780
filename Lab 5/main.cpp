@@ -5,6 +5,8 @@
 #include <string>
 #include "task.h"
 #include "input.h"
+#include "edf.h"
+#include "llf.h"
 
 
 using namespace std;
@@ -39,10 +41,9 @@ int main(int argc, char* argv[]) {
 	//Solve for RM
 	
 	//Solve for EDF
-	
-	
+	//simulateEDF(periodic_tasks, aperiodic_tasks, sim_time);
 	//Solve for LLF
-	
+	simulateLLF(periodic_tasks, aperiodic_tasks, sim_time);
 	
     return 0;
 }
