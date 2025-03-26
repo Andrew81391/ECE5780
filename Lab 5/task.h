@@ -21,8 +21,9 @@ public:
 	int32_t preemptions;
 	int32_t next_deadline;
     int32_t progress_left;  //leave at zero for a completed aperiodic task
+    int32_t time_finished;
 
-    taskPeriodic(string id, int32_t e, int32_t p, int32_t r, bool periodic);
+    taskPeriodic(string id, int32_t e, int32_t p, int32_t r, bool periodic, int32_t sys_time_finished);
 };
 
 #endif // TASK_PERIODIC_H
