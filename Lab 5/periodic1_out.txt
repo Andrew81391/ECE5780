@@ -1,0 +1,783 @@
+Simulation Time: 600 ms
+Periodic Tasks:
+A: Exec Time = 10, Period = 50
+B: Exec Time = 15, Period = 100
+C: Exec Time = 20, Period = 130
+D: Exec Time = 30, Period = 150
+E: Exec Time = 50, Period = 200
+Aperiodic Tasks:
+----------------------
+----Rate Monotonic Scheduler----
+----------------------
+[0 ms] Starting task: A
+[9 ms] Finished task: A
+[10 ms] Starting task: B
+[24 ms] Finished task: B
+[25 ms] Starting task: C
+[44 ms] Finished task: C
+[45 ms] Starting task: D
+[50 ms] Preempted task: D
+[50 ms] Starting task: A
+[59 ms] Finished task: A
+[60 ms] Starting task: D
+[84 ms] Finished task: D
+[85 ms] Starting task: E
+[100 ms] Preempted task: E
+[100 ms] Starting task: A
+[109 ms] Finished task: A
+[110 ms] Starting task: B
+[124 ms] Finished task: B
+[125 ms] Starting task: E
+[130 ms] Preempted task: E
+[130 ms] Starting task: C
+[149 ms] Finished task: C
+[150 ms] Starting task: A
+[159 ms] Finished task: A
+[160 ms] Starting task: D
+[189 ms] Finished task: D
+[190 ms] Starting task: E
+[199 ms] Missed deadline: E
+[200 ms] Starting task: A
+[209 ms] Finished task: A
+[210 ms] Starting task: B
+[224 ms] Finished task: B
+[225 ms] Starting task: E
+[250 ms] Preempted task: E
+[250 ms] Starting task: A
+[259 ms] Finished task: A
+[260 ms] Starting task: C
+[279 ms] Finished task: C
+[280 ms] Starting task: E
+[300 ms] Preempted task: E
+[300 ms] Starting task: A
+[309 ms] Finished task: A
+[310 ms] Starting task: B
+[324 ms] Finished task: B
+[325 ms] Starting task: D
+[350 ms] Preempted task: D
+[350 ms] Starting task: A
+[359 ms] Finished task: A
+[360 ms] Starting task: D
+[364 ms] Finished task: D
+[365 ms] Starting task: E
+[369 ms] Finished task: E
+[370 ms] CPU Idle
+[371 ms] CPU Idle
+[372 ms] CPU Idle
+[373 ms] CPU Idle
+[374 ms] CPU Idle
+[375 ms] CPU Idle
+[376 ms] CPU Idle
+[377 ms] CPU Idle
+[378 ms] CPU Idle
+[379 ms] CPU Idle
+[380 ms] CPU Idle
+[381 ms] CPU Idle
+[382 ms] CPU Idle
+[383 ms] CPU Idle
+[384 ms] CPU Idle
+[385 ms] CPU Idle
+[386 ms] CPU Idle
+[387 ms] CPU Idle
+[388 ms] CPU Idle
+[389 ms] CPU Idle
+[390 ms] Starting task: C
+[400 ms] Preempted task: C
+[400 ms] Starting task: A
+[409 ms] Finished task: A
+[410 ms] Starting task: B
+[424 ms] Finished task: B
+[425 ms] Starting task: C
+[434 ms] Finished task: C
+[435 ms] Starting task: E
+[450 ms] Preempted task: E
+[450 ms] Starting task: A
+[459 ms] Finished task: A
+[460 ms] Starting task: D
+[489 ms] Finished task: D
+[490 ms] Starting task: E
+[500 ms] Preempted task: E
+[500 ms] Starting task: A
+[509 ms] Finished task: A
+[510 ms] Starting task: B
+[524 ms] Finished task: B
+[525 ms] Starting task: C
+[544 ms] Finished task: C
+[545 ms] Starting task: E
+[550 ms] Preempted task: E
+[550 ms] Starting task: A
+[559 ms] Finished task: A
+[560 ms] Starting task: E
+[579 ms] Finished task: E
+[580 ms] CPU Idle
+[581 ms] CPU Idle
+[582 ms] CPU Idle
+[583 ms] CPU Idle
+[584 ms] CPU Idle
+[585 ms] CPU Idle
+[586 ms] CPU Idle
+[587 ms] CPU Idle
+[588 ms] CPU Idle
+[589 ms] CPU Idle
+[590 ms] CPU Idle
+[591 ms] CPU Idle
+[592 ms] CPU Idle
+[593 ms] CPU Idle
+[594 ms] CPU Idle
+[595 ms] CPU Idle
+[596 ms] CPU Idle
+[597 ms] CPU Idle
+[598 ms] CPU Idle
+[599 ms] CPU Idle
+
+Task    Preemptions    Missed Deadlines    Response Time (ms)  
+---------------------------------------------------------------
+A       0              0                   -                   
+B       0              0                   -                   
+C       1              0                   -                   
+D       2              0                   -                   
+E       7              1                   -                   
+
+
+----------------------
+----Earliest Deadline First----
+----------------------
+[0 ms] Starting task: A
+[9 ms] Finished task: A
+[10 ms] Starting task: B
+[24 ms] Finished task: B
+[25 ms] Starting task: C
+[44 ms] Finished task: C
+[45 ms] Starting task: D
+[50 ms] Preempted task: D
+[50 ms] Starting task: A
+[59 ms] Finished task: A
+[60 ms] Starting task: D
+[84 ms] Finished task: D
+[85 ms] Starting task: E
+[100 ms] Preempted task: E
+[100 ms] Starting task: A
+[109 ms] Finished task: A
+[110 ms] Starting task: B
+[124 ms] Finished task: B
+[125 ms] Starting task: E
+[150 ms] Preempted task: E
+[150 ms] Starting task: A
+[159 ms] Finished task: A
+[160 ms] Starting task: E
+[169 ms] Finished task: E
+[170 ms] Starting task: C
+[189 ms] Finished task: C
+[190 ms] Starting task: D
+[200 ms] Preempted task: D
+[200 ms] Starting task: A
+[209 ms] Finished task: A
+[210 ms] Starting task: B
+[224 ms] Finished task: B
+[225 ms] Starting task: D
+[244 ms] Finished task: D
+[245 ms] Starting task: E
+[250 ms] Preempted task: E
+[250 ms] Starting task: A
+[259 ms] Finished task: A
+[260 ms] Starting task: C
+[279 ms] Finished task: C
+[280 ms] Starting task: E
+[300 ms] Preempted task: E
+[300 ms] Starting task: A
+[309 ms] Finished task: A
+[310 ms] Starting task: B
+[324 ms] Finished task: B
+[325 ms] Starting task: E
+[349 ms] Finished task: E
+[350 ms] Starting task: A
+[359 ms] Finished task: A
+[360 ms] Starting task: D
+[389 ms] Finished task: D
+[390 ms] Starting task: C
+[400 ms] Preempted task: C
+[400 ms] Starting task: A
+[409 ms] Finished task: A
+[410 ms] Starting task: B
+[424 ms] Finished task: B
+[425 ms] Starting task: C
+[434 ms] Finished task: C
+[435 ms] Starting task: E
+[450 ms] Preempted task: E
+[450 ms] Starting task: A
+[459 ms] Finished task: A
+[460 ms] Starting task: D
+[489 ms] Finished task: D
+[490 ms] Starting task: E
+[500 ms] Preempted task: E
+[500 ms] Starting task: A
+[509 ms] Finished task: A
+[510 ms] Starting task: B
+[524 ms] Finished task: B
+[525 ms] Starting task: E
+[549 ms] Finished task: E
+[550 ms] Starting task: A
+[559 ms] Finished task: A
+[560 ms] Starting task: C
+[579 ms] Finished task: C
+[580 ms] CPU Idle
+[581 ms] CPU Idle
+[582 ms] CPU Idle
+[583 ms] CPU Idle
+[584 ms] CPU Idle
+[585 ms] CPU Idle
+[586 ms] CPU Idle
+[587 ms] CPU Idle
+[588 ms] CPU Idle
+[589 ms] CPU Idle
+[590 ms] CPU Idle
+[591 ms] CPU Idle
+[592 ms] CPU Idle
+[593 ms] CPU Idle
+[594 ms] CPU Idle
+[595 ms] CPU Idle
+[596 ms] CPU Idle
+[597 ms] CPU Idle
+[598 ms] CPU Idle
+[599 ms] CPU Idle
+
+Task    Preemptions    Missed Deadlines    Response Time (ms)  
+---------------------------------------------------------------
+A       0              0                   -                   
+B       0              0                   -                   
+C       1              0                   -                   
+D       2              0                   -                   
+E       6              0                   -                   
+
+
+----------------------
+----Least Laxity First----
+----------------------
+[0 ms] Starting task: A
+[9 ms] Finished task: A
+[10 ms] Starting task: B
+[24 ms] Finished task: B
+[25 ms] Starting task: C
+[36 ms] Preempted task: C
+[36 ms] Starting task: D
+[37 ms] Preempted task: D
+[37 ms] Starting task: C
+[38 ms] Preempted task: C
+[38 ms] Starting task: D
+[39 ms] Preempted task: D
+[39 ms] Starting task: C
+[40 ms] Preempted task: C
+[40 ms] Starting task: D
+[41 ms] Preempted task: D
+[41 ms] Starting task: C
+[42 ms] Preempted task: C
+[42 ms] Starting task: D
+[43 ms] Preempted task: D
+[43 ms] Starting task: C
+[44 ms] Preempted task: C
+[44 ms] Starting task: D
+[45 ms] Preempted task: D
+[45 ms] Starting task: C
+[46 ms] Preempted task: C
+[46 ms] Starting task: D
+[47 ms] Preempted task: D
+[47 ms] Starting task: C
+[48 ms] Preempted task: C
+[48 ms] Starting task: D
+[49 ms] Preempted task: D
+[49 ms] Starting task: C
+[50 ms] Preempted task: C
+[50 ms] Starting task: A
+[59 ms] Finished task: A
+[60 ms] Starting task: D
+[61 ms] Preempted task: D
+[61 ms] Starting task: C
+[62 ms] Preempted task: C
+[62 ms] Starting task: D
+[63 ms] Preempted task: D
+[63 ms] Starting task: C
+[63 ms] Finished task: C
+[64 ms] Starting task: D
+[84 ms] Finished task: D
+[85 ms] Starting task: E
+[100 ms] Preempted task: E
+[100 ms] Starting task: A
+[109 ms] Finished task: A
+[110 ms] Starting task: E
+[130 ms] Preempted task: E
+[130 ms] Starting task: B
+[131 ms] Preempted task: B
+[131 ms] Starting task: E
+[132 ms] Preempted task: E
+[132 ms] Starting task: B
+[133 ms] Preempted task: B
+[133 ms] Starting task: E
+[134 ms] Preempted task: E
+[134 ms] Starting task: B
+[135 ms] Preempted task: B
+[135 ms] Starting task: E
+[136 ms] Preempted task: E
+[136 ms] Starting task: B
+[137 ms] Preempted task: B
+[137 ms] Starting task: E
+[138 ms] Preempted task: E
+[138 ms] Starting task: B
+[139 ms] Preempted task: B
+[139 ms] Starting task: E
+[140 ms] Preempted task: E
+[140 ms] Starting task: B
+[141 ms] Preempted task: B
+[141 ms] Starting task: E
+[142 ms] Preempted task: E
+[142 ms] Starting task: B
+[143 ms] Preempted task: B
+[143 ms] Starting task: E
+[144 ms] Preempted task: E
+[144 ms] Starting task: B
+[145 ms] Preempted task: B
+[145 ms] Starting task: E
+[146 ms] Preempted task: E
+[146 ms] Starting task: B
+[147 ms] Preempted task: B
+[147 ms] Starting task: E
+[148 ms] Preempted task: E
+[148 ms] Starting task: B
+[149 ms] Preempted task: B
+[149 ms] Starting task: E
+[150 ms] Preempted task: E
+[150 ms] Starting task: A
+[156 ms] Preempted task: A
+[156 ms] Starting task: B
+[157 ms] Preempted task: B
+[157 ms] Starting task: E
+[158 ms] Preempted task: E
+[158 ms] Starting task: A
+[159 ms] Preempted task: A
+[159 ms] Starting task: B
+[160 ms] Preempted task: B
+[160 ms] Starting task: E
+[161 ms] Preempted task: E
+[161 ms] Starting task: A
+[162 ms] Preempted task: A
+[162 ms] Starting task: B
+[163 ms] Preempted task: B
+[163 ms] Starting task: E
+[164 ms] Preempted task: E
+[164 ms] Starting task: A
+[165 ms] Preempted task: A
+[165 ms] Starting task: B
+[166 ms] Preempted task: B
+[166 ms] Starting task: E
+[167 ms] Preempted task: E
+[167 ms] Starting task: A
+[167 ms] Finished task: A
+[168 ms] Starting task: B
+[168 ms] Finished task: B
+[169 ms] Starting task: E
+[169 ms] Finished task: E
+[170 ms] Starting task: C
+[189 ms] Finished task: C
+[190 ms] Starting task: D
+[200 ms] Preempted task: D
+[200 ms] Starting task: A
+[209 ms] Finished task: A
+[210 ms] Starting task: D
+[215 ms] Preempted task: D
+[215 ms] Starting task: B
+[216 ms] Preempted task: B
+[216 ms] Starting task: D
+[217 ms] Preempted task: D
+[217 ms] Starting task: B
+[218 ms] Preempted task: B
+[218 ms] Starting task: D
+[219 ms] Preempted task: D
+[219 ms] Starting task: B
+[220 ms] Preempted task: B
+[220 ms] Starting task: D
+[221 ms] Preempted task: D
+[221 ms] Starting task: B
+[222 ms] Preempted task: B
+[222 ms] Starting task: D
+[223 ms] Preempted task: D
+[223 ms] Starting task: B
+[224 ms] Preempted task: B
+[224 ms] Starting task: D
+[225 ms] Preempted task: D
+[225 ms] Starting task: B
+[226 ms] Preempted task: B
+[226 ms] Starting task: D
+[227 ms] Preempted task: D
+[227 ms] Starting task: B
+[228 ms] Preempted task: B
+[228 ms] Starting task: D
+[229 ms] Preempted task: D
+[229 ms] Starting task: B
+[230 ms] Preempted task: B
+[230 ms] Starting task: D
+[231 ms] Preempted task: D
+[231 ms] Starting task: B
+[232 ms] Preempted task: B
+[232 ms] Starting task: D
+[233 ms] Preempted task: D
+[233 ms] Starting task: B
+[234 ms] Preempted task: B
+[234 ms] Starting task: D
+[235 ms] Preempted task: D
+[235 ms] Starting task: B
+[236 ms] Preempted task: B
+[236 ms] Starting task: D
+[237 ms] Preempted task: D
+[237 ms] Starting task: B
+[238 ms] Preempted task: B
+[238 ms] Starting task: D
+[239 ms] Preempted task: D
+[239 ms] Starting task: B
+[240 ms] Preempted task: B
+[240 ms] Starting task: D
+[241 ms] Preempted task: D
+[241 ms] Starting task: B
+[242 ms] Preempted task: B
+[242 ms] Starting task: D
+[243 ms] Preempted task: D
+[243 ms] Starting task: B
+[243 ms] Finished task: B
+[244 ms] Starting task: D
+[244 ms] Finished task: D
+[245 ms] Starting task: E
+[250 ms] Preempted task: E
+[250 ms] Starting task: A
+[259 ms] Finished task: A
+[260 ms] Starting task: E
+[275 ms] Preempted task: E
+[275 ms] Starting task: C
+[276 ms] Preempted task: C
+[276 ms] Starting task: E
+[277 ms] Preempted task: E
+[277 ms] Starting task: C
+[278 ms] Preempted task: C
+[278 ms] Starting task: E
+[279 ms] Preempted task: E
+[279 ms] Starting task: C
+[280 ms] Preempted task: C
+[280 ms] Starting task: E
+[281 ms] Preempted task: E
+[281 ms] Starting task: C
+[282 ms] Preempted task: C
+[282 ms] Starting task: E
+[283 ms] Preempted task: E
+[283 ms] Starting task: C
+[284 ms] Preempted task: C
+[284 ms] Starting task: E
+[285 ms] Preempted task: E
+[285 ms] Starting task: C
+[286 ms] Preempted task: C
+[286 ms] Starting task: E
+[287 ms] Preempted task: E
+[287 ms] Starting task: C
+[288 ms] Preempted task: C
+[288 ms] Starting task: E
+[289 ms] Preempted task: E
+[289 ms] Starting task: C
+[290 ms] Preempted task: C
+[290 ms] Starting task: E
+[291 ms] Preempted task: E
+[291 ms] Starting task: C
+[292 ms] Preempted task: C
+[292 ms] Starting task: E
+[293 ms] Preempted task: E
+[293 ms] Starting task: C
+[294 ms] Preempted task: C
+[294 ms] Starting task: E
+[295 ms] Preempted task: E
+[295 ms] Starting task: C
+[296 ms] Preempted task: C
+[296 ms] Starting task: E
+[297 ms] Preempted task: E
+[297 ms] Starting task: C
+[298 ms] Preempted task: C
+[298 ms] Starting task: E
+[299 ms] Preempted task: E
+[299 ms] Starting task: C
+[300 ms] Preempted task: C
+[300 ms] Starting task: A
+[309 ms] Finished task: A
+[310 ms] Starting task: E
+[311 ms] Preempted task: E
+[311 ms] Starting task: C
+[312 ms] Preempted task: C
+[312 ms] Starting task: E
+[313 ms] Preempted task: E
+[313 ms] Starting task: C
+[314 ms] Preempted task: C
+[314 ms] Starting task: E
+[315 ms] Preempted task: E
+[315 ms] Starting task: B
+[316 ms] Preempted task: B
+[316 ms] Starting task: C
+[317 ms] Preempted task: C
+[317 ms] Starting task: E
+[318 ms] Preempted task: E
+[318 ms] Starting task: B
+[319 ms] Preempted task: B
+[319 ms] Starting task: C
+[320 ms] Preempted task: C
+[320 ms] Starting task: E
+[321 ms] Preempted task: E
+[321 ms] Starting task: B
+[322 ms] Preempted task: B
+[322 ms] Starting task: C
+[323 ms] Preempted task: C
+[323 ms] Starting task: E
+[324 ms] Preempted task: E
+[324 ms] Starting task: B
+[325 ms] Preempted task: B
+[325 ms] Starting task: C
+[326 ms] Preempted task: C
+[326 ms] Starting task: E
+[327 ms] Preempted task: E
+[327 ms] Starting task: B
+[328 ms] Preempted task: B
+[328 ms] Starting task: C
+[328 ms] Finished task: C
+[329 ms] Starting task: E
+[330 ms] Preempted task: E
+[330 ms] Starting task: B
+[331 ms] Preempted task: B
+[331 ms] Starting task: E
+[332 ms] Preempted task: E
+[332 ms] Starting task: B
+[333 ms] Preempted task: B
+[333 ms] Starting task: E
+[334 ms] Preempted task: E
+[334 ms] Starting task: B
+[335 ms] Preempted task: B
+[335 ms] Starting task: E
+[336 ms] Preempted task: E
+[336 ms] Starting task: B
+[337 ms] Preempted task: B
+[337 ms] Starting task: E
+[338 ms] Preempted task: E
+[338 ms] Starting task: B
+[339 ms] Preempted task: B
+[339 ms] Starting task: E
+[340 ms] Preempted task: E
+[340 ms] Starting task: B
+[341 ms] Preempted task: B
+[341 ms] Starting task: E
+[342 ms] Preempted task: E
+[342 ms] Starting task: B
+[343 ms] Preempted task: B
+[343 ms] Starting task: E
+[344 ms] Preempted task: E
+[344 ms] Starting task: B
+[345 ms] Preempted task: B
+[345 ms] Starting task: E
+[346 ms] Preempted task: E
+[346 ms] Starting task: B
+[347 ms] Preempted task: B
+[347 ms] Starting task: E
+[348 ms] Preempted task: E
+[348 ms] Starting task: B
+[348 ms] Finished task: B
+[349 ms] Starting task: E
+[349 ms] Finished task: E
+[350 ms] Starting task: A
+[359 ms] Finished task: A
+[360 ms] Starting task: D
+[389 ms] Finished task: D
+[390 ms] Starting task: C
+[400 ms] Preempted task: C
+[400 ms] Starting task: A
+[409 ms] Finished task: A
+[410 ms] Starting task: B
+[424 ms] Finished task: B
+[425 ms] Starting task: C
+[434 ms] Finished task: C
+[435 ms] Starting task: E
+[450 ms] Preempted task: E
+[450 ms] Starting task: A
+[459 ms] Finished task: A
+[460 ms] Starting task: E
+[465 ms] Preempted task: E
+[465 ms] Starting task: D
+[466 ms] Preempted task: D
+[466 ms] Starting task: E
+[467 ms] Preempted task: E
+[467 ms] Starting task: D
+[468 ms] Preempted task: D
+[468 ms] Starting task: E
+[469 ms] Preempted task: E
+[469 ms] Starting task: D
+[470 ms] Preempted task: D
+[470 ms] Starting task: E
+[471 ms] Preempted task: E
+[471 ms] Starting task: D
+[472 ms] Preempted task: D
+[472 ms] Starting task: E
+[473 ms] Preempted task: E
+[473 ms] Starting task: D
+[474 ms] Preempted task: D
+[474 ms] Starting task: E
+[475 ms] Preempted task: E
+[475 ms] Starting task: D
+[476 ms] Preempted task: D
+[476 ms] Starting task: E
+[477 ms] Preempted task: E
+[477 ms] Starting task: D
+[478 ms] Preempted task: D
+[478 ms] Starting task: E
+[479 ms] Preempted task: E
+[479 ms] Starting task: D
+[480 ms] Preempted task: D
+[480 ms] Starting task: E
+[481 ms] Preempted task: E
+[481 ms] Starting task: D
+[482 ms] Preempted task: D
+[482 ms] Starting task: E
+[483 ms] Preempted task: E
+[483 ms] Starting task: D
+[484 ms] Preempted task: D
+[484 ms] Starting task: E
+[485 ms] Preempted task: E
+[485 ms] Starting task: D
+[486 ms] Preempted task: D
+[486 ms] Starting task: E
+[487 ms] Preempted task: E
+[487 ms] Starting task: D
+[488 ms] Preempted task: D
+[488 ms] Starting task: E
+[489 ms] Preempted task: E
+[489 ms] Starting task: D
+[490 ms] Preempted task: D
+[490 ms] Starting task: E
+[491 ms] Preempted task: E
+[491 ms] Starting task: D
+[492 ms] Preempted task: D
+[492 ms] Starting task: E
+[493 ms] Preempted task: E
+[493 ms] Starting task: D
+[494 ms] Preempted task: D
+[494 ms] Starting task: E
+[495 ms] Preempted task: E
+[495 ms] Starting task: D
+[496 ms] Preempted task: D
+[496 ms] Starting task: E
+[497 ms] Preempted task: E
+[497 ms] Starting task: D
+[498 ms] Preempted task: D
+[498 ms] Starting task: E
+[499 ms] Preempted task: E
+[499 ms] Starting task: D
+[500 ms] Preempted task: D
+[500 ms] Starting task: A
+[509 ms] Finished task: A
+[510 ms] Starting task: B
+[513 ms] Preempted task: B
+[513 ms] Starting task: E
+[514 ms] Preempted task: E
+[514 ms] Starting task: B
+[515 ms] Preempted task: B
+[515 ms] Starting task: D
+[516 ms] Preempted task: D
+[516 ms] Starting task: E
+[517 ms] Preempted task: E
+[517 ms] Starting task: B
+[518 ms] Preempted task: B
+[518 ms] Starting task: D
+[519 ms] Preempted task: D
+[519 ms] Starting task: E
+[520 ms] Preempted task: E
+[520 ms] Starting task: B
+[521 ms] Preempted task: B
+[521 ms] Starting task: D
+[522 ms] Preempted task: D
+[522 ms] Starting task: E
+[523 ms] Preempted task: E
+[523 ms] Starting task: B
+[524 ms] Preempted task: B
+[524 ms] Starting task: D
+[525 ms] Preempted task: D
+[525 ms] Starting task: E
+[526 ms] Preempted task: E
+[526 ms] Starting task: B
+[527 ms] Preempted task: B
+[527 ms] Starting task: D
+[528 ms] Preempted task: D
+[528 ms] Starting task: E
+[529 ms] Preempted task: E
+[529 ms] Starting task: B
+[530 ms] Preempted task: B
+[530 ms] Starting task: D
+[531 ms] Preempted task: D
+[531 ms] Starting task: E
+[532 ms] Preempted task: E
+[532 ms] Starting task: B
+[533 ms] Preempted task: B
+[533 ms] Starting task: D
+[534 ms] Preempted task: D
+[534 ms] Starting task: E
+[535 ms] Preempted task: E
+[535 ms] Starting task: B
+[536 ms] Preempted task: B
+[536 ms] Starting task: D
+[537 ms] Preempted task: D
+[537 ms] Starting task: E
+[538 ms] Preempted task: E
+[538 ms] Starting task: B
+[539 ms] Preempted task: B
+[539 ms] Starting task: D
+[540 ms] Preempted task: D
+[540 ms] Starting task: E
+[541 ms] Preempted task: E
+[541 ms] Starting task: B
+[542 ms] Preempted task: B
+[542 ms] Starting task: D
+[543 ms] Preempted task: D
+[543 ms] Starting task: E
+[544 ms] Preempted task: E
+[544 ms] Starting task: B
+[545 ms] Preempted task: B
+[545 ms] Starting task: D
+[546 ms] Preempted task: D
+[546 ms] Starting task: E
+[547 ms] Preempted task: E
+[547 ms] Starting task: B
+[547 ms] Finished task: B
+[548 ms] Starting task: D
+[548 ms] Finished task: D
+[549 ms] Starting task: E
+[549 ms] Finished task: E
+[550 ms] Starting task: A
+[559 ms] Finished task: A
+[560 ms] Starting task: C
+[579 ms] Finished task: C
+[580 ms] CPU Idle
+[581 ms] CPU Idle
+[582 ms] CPU Idle
+[583 ms] CPU Idle
+[584 ms] CPU Idle
+[585 ms] CPU Idle
+[586 ms] CPU Idle
+[587 ms] CPU Idle
+[588 ms] CPU Idle
+[589 ms] CPU Idle
+[590 ms] CPU Idle
+[591 ms] CPU Idle
+[592 ms] CPU Idle
+[593 ms] CPU Idle
+[594 ms] CPU Idle
+[595 ms] CPU Idle
+[596 ms] CPU Idle
+[597 ms] CPU Idle
+[598 ms] CPU Idle
+[599 ms] CPU Idle
+
+Task    Preemptions    Missed Deadlines    Response Time (ms)  
+---------------------------------------------------------------
+A       4              0                   -                   
+B       54             0                   -                   
+C       29             0                   -                   
+D       54             0                   -                   
+E       78             0                   -                   
+
+
