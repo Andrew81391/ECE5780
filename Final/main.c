@@ -74,7 +74,7 @@ int main (void) {
 		xTaskCreate(
 			SENSORTask,
 			"SENSORTask",
-			256,
+			512,
 			NULL,
 			2,
 			&sensorTaskHandle

@@ -1,10 +1,10 @@
-#include "task.h"
-#include "queue.h"
 #include "ourtask.h"
 #include "stm32l476xx.h"
 #include "FreeRTOS.h"
+#include "queue.h"
+#include "task.h"
 #include <stdio.h>
-#define TIMEOUT_DURATION 5000
+#define TIMEOUT_DURATION 50000
 
 
 extern QueueHandle_t xQueueLED;
@@ -70,13 +70,22 @@ void SENSORTask (void *pvParameters) {
 					}
 				}
 				if (timeout_flag==0) {
+					timeout=0;
 					char temp = ((char)USART3->RDR)-45;
 					temp = (9.0/5.0) * temp + 27;
 					char tempString[15];
 					sprintf(tempString, "%d deg F\r\n", temp);
 					for (int i=0; tempString[i] != NULL; i++) {
-						while ((USART2->ISR & USART_ISR_TXE)!=USART_ISR_TXE);
-						USART2->TDR = tempString[i];
+						while ((USART2->ISR & USART_ISR_TXE)!=USART_ISR_TXE){
+							timeout++;
+							if (timeout==TIMEOUT_DURATION){
+								timeout_flag=1;
+								break;
+							}
+						}
+						if (timeout_flag == 0){
+							USART2->TDR = tempString[i];
+						}
 					}
 				}
 			}
@@ -104,13 +113,22 @@ void SENSORTask (void *pvParameters) {
 						
 					}
 					if (timeout_flag==0){
+						timeout=0;
 						prox |= USART3->RDR;
 						prox = (int)(prox/25.4);
 						char proxString[15];
 						sprintf(proxString, "%d inches\r\n", prox);
 						for (int i=0; proxString[i] != NULL; i++) {
-							while ((USART2->ISR & USART_ISR_TXE)!=USART_ISR_TXE);
-							USART2->TDR = proxString[i];
+							while ((USART2->ISR & USART_ISR_TXE)!=USART_ISR_TXE){
+								timeout++;
+								if (timeout == TIMEOUT_DURATION) {
+									timeout_flag = 1;
+									break;
+								}
+							}
+							if (timeout_flag == 0){
+								USART2->TDR = proxString[i];
+							}
 						}
 					}
 				}
@@ -120,6 +138,7 @@ void SENSORTask (void *pvParameters) {
 }
 
 void TIM4_IRQHandler() {
+	eTaskState sensorTaskState = 0x10;
 	static int32_t index = 0;
 	if ((TIM4->SR & TIM_SR_CC1IF) != 0) {	
 		BaseType_t xHigherPriorityTaskWoken = pdFALSE;
@@ -153,7 +172,7 @@ void TIM4_IRQHandler() {
 					TIM4->ARR = 70;
 					break;
 				case 's':
-					eTaskState sensorTaskState eTaskGetState(sensorTaskHandle);
+					sensorTaskState = eTaskGetState(sensorTaskHandle);
 					break;
 				case 't': {
 					xQueueSendToBackFromISR(xQueueSENSOR, &note, &xHigherPriorityTaskWoken);
