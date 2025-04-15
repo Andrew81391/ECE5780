@@ -10,6 +10,8 @@
 extern QueueHandle_t xQueueLED;
 extern QueueHandle_t xQueueUART;
 extern QueueHandle_t xQueueSENSOR;
+extern TaskHandle_t LEDTaskHandle;
+extern TaskHandle_t BTNTaskHandle;
 extern TaskHandle_t sensorTaskHandle;
 extern const uint16_t sinLUT[];
 
@@ -56,9 +58,14 @@ void SENSORTask (void *pvParameters) {
 		char com;
 		char timeout_flag = 0;
 		int32_t timeout = 0;
-		BaseType_t status = xQueueReceive(xQueueSENSOR, &com, portMAX_DELAY);
+		BaseType_t status = xQueueReceive(xQueueSENSOR, &com, 0);
+		char temp;
+		char tempString[15]="balls";
+		int prox;
+		char proxString[15]="NOOO";
 		if (status == pdPASS) {
 			if (com == 't') {
+				timeout=0;
 				while (!(USART3->ISR & USART_ISR_TXE));
 				USART3->TDR = 0x50;
 				//for (volatile int i =0; i<500; i++);
@@ -71,10 +78,10 @@ void SENSORTask (void *pvParameters) {
 				}
 				if (timeout_flag==0) {
 					timeout=0;
-					char temp = ((char)USART3->RDR)-45;
-					temp = (9.0/5.0) * temp + 27;
-					char tempString[15];
-					sprintf(tempString, "%d deg F\r\n", temp);
+					temp = ((char)USART3->RDR)-45;
+					temp = (char)((9.0/5.0) * temp + 27);
+					
+					//sprintf(tempString, "%d F\r\n", temp);
 					for (int i=0; tempString[i] != NULL; i++) {
 						while ((USART2->ISR & USART_ISR_TXE)!=USART_ISR_TXE){
 							timeout++;
@@ -89,56 +96,88 @@ void SENSORTask (void *pvParameters) {
 					}
 				}
 			}
-			else {
-				while (!(USART3->ISR & USART_ISR_TXE));
-				USART3->TDR = 0x55;
-				//for (volatile int i =0; i<500; i++);
-				int prox;
-				while (!(USART3->ISR & USART_ISR_RXNE)){
-					timeout++;
-					if (timeout==TIMEOUT_DURATION){
-						timeout_flag=1;
-						break;
-					}
-				}
-				if (timeout_flag==0){
-					timeout=0;
-					prox = (USART3->RDR) << 8;
-					while (!(USART3->ISR & USART_ISR_RXNE)){
-						timeout++;
-						if (timeout == TIMEOUT_DURATION){
-							timeout_flag=1;
-							break;
+			else if (com=='p') {
+				
+				uint16_t proxRaw;
+				if (UART3_Read2Bytes(&proxRaw, TIMEOUT_DURATION, 0x55) == 0) {
+						int proxInches = proxRaw / 25.4;
+
+						const char msg[] = "Distance: ";
+						for (int i = 0; msg[i] != '\0'; i++) {
+								while (!(USART2->ISR & USART_ISR_TXE));
+								USART2->TDR = msg[i];
 						}
-						
-					}
-					if (timeout_flag==0){
-						timeout=0;
-						prox |= USART3->RDR;
-						prox = (int)(prox/25.4);
-						char proxString[15];
-						sprintf(proxString, "%d inches\r\n", prox);
-						for (int i=0; proxString[i] != NULL; i++) {
-							while ((USART2->ISR & USART_ISR_TXE)!=USART_ISR_TXE){
-								timeout++;
-								if (timeout == TIMEOUT_DURATION) {
-									timeout_flag = 1;
-									break;
-								}
-							}
-							if (timeout_flag == 0){
-								USART2->TDR = proxString[i];
-							}
+
+						// Convert and print value (you can improve this later)
+						char buf[10];
+						int len = sprintf(buf, "%d\r\n", proxInches);
+						for (int i = 0; i < len; i++) {
+								while (!(USART2->ISR & USART_ISR_TXE));
+								USART2->TDR = buf[i];
 						}
-					}
+				} else {
+						const char errorMsg[] = "UART read error\r\n";
+						for (int i = 0; errorMsg[i] != '\0'; i++) {
+								while (!(USART2->ISR & USART_ISR_TXE));
+								USART2->TDR = errorMsg[i];
+						}
 				}
+				
+				
+				
+//				timeout=0;
+//				while (!(USART3->ISR & USART_ISR_TXE));
+//				USART3->TDR = 0x55;
+//				//for (volatile int i =0; i<500; i++);
+//				while (!(USART3->ISR & USART_ISR_RXNE)){
+//					timeout++;
+//					if (timeout==TIMEOUT_DURATION){
+//						timeout_flag=1;
+//						break;
+//					}
+//				}
+//				if (timeout_flag==0){
+//					timeout=0;
+//					prox = (USART3->RDR) << 8;
+//					while (!(USART3->ISR & USART_ISR_RXNE)){
+//						timeout++;
+//						if (timeout == TIMEOUT_DURATION){
+//							timeout_flag=1;
+//							break;
+//						}
+//						
+//					}
+//					if (timeout_flag==0){
+//						timeout=0;
+//						prox |= USART3->RDR;
+//						//prox = (int)(prox/25.4);
+//						//sprintf(proxString, "%d mm\r\n", prox);
+//						taskENTER_CRITICAL();
+//						for (int i=0; proxString[i] != NULL; i++) {
+//							while ((USART2->ISR & USART_ISR_TXE)!=USART_ISR_TXE){
+//								timeout++;
+//								if (timeout == TIMEOUT_DURATION) {
+//									timeout_flag = 1;
+//									break;
+//								}
+//							}
+//							if (timeout_flag == 0){
+//								USART2->TDR = proxString[i];
+//							}
+//						}
+//						taskEXIT_CRITICAL();
+//					}
+//				}
 			}
 		}
 	}
 }
 
 void TIM4_IRQHandler() {
-	eTaskState sensorTaskState = 0x10;
+	//eTaskState sensorTaskState = 0x10;
+	UBaseType_t LEDStackLeft;
+	UBaseType_t BTNStackLeft;
+	UBaseType_t sensorStackLeft;
 	static int32_t index = 0;
 	if ((TIM4->SR & TIM_SR_CC1IF) != 0) {	
 		BaseType_t xHigherPriorityTaskWoken = pdFALSE;
@@ -172,7 +211,10 @@ void TIM4_IRQHandler() {
 					TIM4->ARR = 70;
 					break;
 				case 's':
-					sensorTaskState = eTaskGetState(sensorTaskHandle);
+					//sensorTaskState = eTaskGetState(sensorTaskHandle);
+					LEDStackLeft = uxTaskGetStackHighWaterMark(LEDTaskHandle);
+					BTNStackLeft = uxTaskGetStackHighWaterMark(BTNTaskHandle);
+					sensorStackLeft = uxTaskGetStackHighWaterMark(sensorTaskHandle);
 					break;
 				case 't': {
 					xQueueSendToBackFromISR(xQueueSENSOR, &note, &xHigherPriorityTaskWoken);
@@ -283,4 +325,33 @@ void TIM4Setup() {
 	
 	//enable timer 4 interrupt
 	NVIC_EnableIRQ(TIM4_IRQn);
+}
+
+int UART3_Read2Bytes(uint16_t *outVal, int32_t timeoutLimit, char command) {
+    int32_t timeout = 0;
+
+    // Clear any previous errors
+    if (USART3->ISR & (USART_ISR_ORE | USART_ISR_FE | USART_ISR_NE)) {
+        volatile char flush = USART3->RDR;
+        USART3->ICR |= (USART_ICR_ORECF | USART_ICR_FECF | USART_ICR_NCF);
+    }
+		// --- Send Command ---
+		while (!(USART3->ISR & USART_ISR_TXE));
+				USART3->TDR = command;
+    // --- First Byte ---
+    timeout = 0;
+    while (!(USART3->ISR & USART_ISR_RXNE)) {
+        if (++timeout >= timeoutLimit) return -1;
+    }
+    uint8_t msb = USART3->RDR;
+
+    // --- Second Byte ---
+    timeout = 0;
+    while (!(USART3->ISR & USART_ISR_RXNE)) {
+        if (++timeout >= timeoutLimit) return -2;
+    }
+    uint8_t lsb = USART3->RDR;
+
+    *outVal = ((uint16_t)msb << 8) | lsb;
+    return 0;
 }

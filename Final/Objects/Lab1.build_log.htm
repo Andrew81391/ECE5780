@@ -22,7 +22,7 @@ Dialog DLL:      TCM.DLL V1.53.0.0
  
 <h2>Project:</h2>
 C:\Users\a02390410\Desktop\ECE5780\Final\Final.uvprojx
-Project File Date:  04/11/2025
+Project File Date:  04/14/2025
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.16', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
@@ -87,7 +87,7 @@ C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\
 ./RTE/RTOS\FreeRTOSConfig.h(352): warning: '__ARM_ARCH_7A__' is not defined, evaluates to 0 [-Wundef]
 #if (__ARM_ARCH_7A__ == 1U)
      ^
-main.c(92): warning: 'return' will never be executed [-Wunreachable-code-return]
+main.c(94): warning: 'return' will never be executed [-Wunreachable-code-return]
         return 0;
                ^
 2 warnings generated.
@@ -98,7 +98,7 @@ C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\
 ./RTE/RTOS\FreeRTOSConfig.h(352): warning: '__ARM_ARCH_7A__' is not defined, evaluates to 0 [-Wundef]
 #if (__ARM_ARCH_7A__ == 1U)
      ^
-UART.c(127): warning: no newline at end of file [-Wnewline-eof]
+UART.c(172): warning: no newline at end of file [-Wnewline-eof]
 }
  ^
 2 warnings generated.
@@ -109,31 +109,56 @@ C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\
 ./RTE/RTOS\FreeRTOSConfig.h(352): warning: '__ARM_ARCH_7A__' is not defined, evaluates to 0 [-Wundef]
 #if (__ARM_ARCH_7A__ == 1U)
      ^
-ourtask.c(17): warning: unused parameter 'pvParameters' [-Wunused-parameter]
+ourtask.c(19): warning: unused parameter 'pvParameters' [-Wunused-parameter]
 void LEDTask (void *pvParameters) {
                     ^
-ourtask.c(17): warning: function 'LEDTask' could be declared with attribute 'noreturn' [-Wmissing-noreturn]
+ourtask.c(19): warning: function 'LEDTask' could be declared with attribute 'noreturn' [-Wmissing-noreturn]
 void LEDTask (void *pvParameters) {
                                   ^
-ourtask.c(32): warning: unused parameter 'pvParameters' [-Wunused-parameter]
+ourtask.c(34): warning: unused parameter 'pvParameters' [-Wunused-parameter]
 void BTNTask (void *pvParameters) {
                     ^
-ourtask.c(32): warning: function 'BTNTask' could be declared with attribute 'noreturn' [-Wmissing-noreturn]
+ourtask.c(34): warning: function 'BTNTask' could be declared with attribute 'noreturn' [-Wmissing-noreturn]
 void BTNTask (void *pvParameters) {
                                   ^
-ourtask.c(75): warning: implicit conversion turns floating-point number into integer: 'double' to 'char' [-Wfloat-conversion]
-                                        temp = (9.0/5.0) * temp + 27;
-                                             ~ ~~~~~~~~~~~~~~~~~^~~~
-ourtask.c(54): warning: unused parameter 'pvParameters' [-Wunused-parameter]
+ourtask.c(103): warning: implicit conversion turns floating-point number into integer: 'double' to 'int' [-Wfloat-conversion]
+                                                int proxInches = proxRaw / 25.4;
+                                                    ~~~~~~~~~~   ~~~~~~~~^~~~~~
+ourtask.c(64): warning: unused variable 'prox' [-Wunused-variable]
+                int prox;
+                    ^
+ourtask.c(65): warning: unused variable 'proxString' [-Wunused-variable]
+                char proxString[15]="NOOO";
+                     ^
+ourtask.c(56): warning: unused parameter 'pvParameters' [-Wunused-parameter]
 void SENSORTask (void *pvParameters) {
                        ^
-ourtask.c(54): warning: function 'SENSORTask' could be declared with attribute 'noreturn' [-Wmissing-noreturn]
+ourtask.c(56): warning: function 'SENSORTask' could be declared with attribute 'noreturn' [-Wmissing-noreturn]
 void SENSORTask (void *pvParameters) {
                                      ^
-ourtask.c(141): warning: integer constant not in range of enumerated type 'eTaskState' [-Wassign-enum]
-        eTaskState sensorTaskState = 0x10;
-                                     ^
-9 warnings generated.
+ourtask.c(335): warning: implicit conversion loses integer precision: 'volatile uint16_t' (aka 'volatile unsigned short') to 'char' [-Wimplicit-int-conversion]
+        volatile char flush = USART3->RDR;
+                      ~~~~~   ~~~~~~~~^~~
+ourtask.c(335): warning: unused variable 'flush' [-Wunused-variable]
+        volatile char flush = USART3->RDR;
+                      ^
+ourtask.c(345): warning: implicit conversion loses integer precision: 'volatile uint16_t' (aka 'volatile unsigned short') to 'uint8_t' (aka 'unsigned char') [-Wimplicit-int-conversion]
+    uint8_t msb = USART3->RDR;
+            ~~~   ~~~~~~~~^~~
+ourtask.c(352): warning: implicit conversion loses integer precision: 'volatile uint16_t' (aka 'volatile unsigned short') to 'uint8_t' (aka 'unsigned char') [-Wimplicit-int-conversion]
+    uint8_t lsb = USART3->RDR;
+            ~~~   ~~~~~~~~^~~
+ourtask.c(354): warning: implicit conversion loses integer precision: 'int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
+    *outVal = ((uint16_t)msb << 8) | lsb;
+            ~ ~~~~~~~~~~~~~~~~~~~~~^~~~~
+ourtask.c(356): warning: no newline at end of file [-Wnewline-eof]
+}
+ ^
+ourtask.c(338): warning: while loop has empty body [-Wempty-body]
+                while (!(USART3->ISR & USART_ISR_TXE));
+                                                      ^
+ourtask.c(338): note: put the semicolon on a separate line to silence this warning
+17 warnings generated.
 compiling ourtask.c...
 C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/cmsis_os2.c(29): warning: In file included from...
 C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(64): warning: In file included from...
@@ -242,37 +267,6 @@ C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/portable
                                                 ^
 6 warnings generated.
 compiling heap_4.c...
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/timers.c(37): warning: In file included from...
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(64): warning: In file included from...
-./RTE/RTOS\FreeRTOSConfig.h(352): warning: '__ARM_ARCH_7A__' is not defined, evaluates to 0 [-Wundef]
-#if (__ARM_ARCH_7A__ == 1U)
-     ^
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/timers.c(37): warning: In file included from...
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(3139): warning: padding size of 'struct xSTATIC_TCB' with 1 byte to alignment boundary [-Wpadded]
-typedef struct xSTATIC_TCB
-               ^
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/timers.c(83): warning: padding size of 'struct tmrTimerControl' with 3 bytes to alignment boundary [-Wpadded]
-    typedef struct tmrTimerControl                                               /* The old naming convention is used to prevent breaking kernel aware debuggers. */
-                   ^
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/timers.c(37): warning: In file included from...
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(3284): warning: padding size of 'struct xSTATIC_TIMER' with 3 bytes to alignment boundary [-Wpadded]
-typedef struct xSTATIC_TIMER
-               ^
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/timers.c(749): warning: function 'prvTimerTask' could be declared with attribute 'noreturn' [-Wmissing-noreturn]
-    {
-    ^
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/timers.c(828): warning: empty expression statement has no effect; remove unnecessary ';' to silence this warning [-Wextra-semi-stmt]
-                        taskYIELD_WITHIN_API();
-                                              ^
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/timers.c(37): warning: In file included from...
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(3236): warning: padding struct 'struct xSTATIC_QUEUE' with 1 byte to align 'uxDummy8' [-Wpadded]
-        UBaseType_t uxDummy8;
-                    ^
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(3213): warning: padding size of 'struct xSTATIC_QUEUE' with 3 bytes to alignment boundary [-Wpadded]
-typedef struct xSTATIC_QUEUE
-               ^
-8 warnings generated.
-compiling timers.c...
 C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/queue.c(37): warning: In file included from...
 C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(64): warning: In file included from...
 ./RTE/RTOS\FreeRTOSConfig.h(352): warning: '__ARM_ARCH_7A__' is not defined, evaluates to 0 [-Wundef]
@@ -323,6 +317,37 @@ C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/queue.c(
                                           ^
 15 warnings generated.
 compiling queue.c...
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/timers.c(37): warning: In file included from...
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(64): warning: In file included from...
+./RTE/RTOS\FreeRTOSConfig.h(352): warning: '__ARM_ARCH_7A__' is not defined, evaluates to 0 [-Wundef]
+#if (__ARM_ARCH_7A__ == 1U)
+     ^
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/timers.c(37): warning: In file included from...
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(3139): warning: padding size of 'struct xSTATIC_TCB' with 1 byte to alignment boundary [-Wpadded]
+typedef struct xSTATIC_TCB
+               ^
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/timers.c(83): warning: padding size of 'struct tmrTimerControl' with 3 bytes to alignment boundary [-Wpadded]
+    typedef struct tmrTimerControl                                               /* The old naming convention is used to prevent breaking kernel aware debuggers. */
+                   ^
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/timers.c(37): warning: In file included from...
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(3284): warning: padding size of 'struct xSTATIC_TIMER' with 3 bytes to alignment boundary [-Wpadded]
+typedef struct xSTATIC_TIMER
+               ^
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/timers.c(749): warning: function 'prvTimerTask' could be declared with attribute 'noreturn' [-Wmissing-noreturn]
+    {
+    ^
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/timers.c(828): warning: empty expression statement has no effect; remove unnecessary ';' to silence this warning [-Wextra-semi-stmt]
+                        taskYIELD_WITHIN_API();
+                                              ^
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/timers.c(37): warning: In file included from...
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(3236): warning: padding struct 'struct xSTATIC_QUEUE' with 1 byte to align 'uxDummy8' [-Wpadded]
+        UBaseType_t uxDummy8;
+                    ^
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(3213): warning: padding size of 'struct xSTATIC_QUEUE' with 3 bytes to alignment boundary [-Wpadded]
+typedef struct xSTATIC_QUEUE
+               ^
+8 warnings generated.
+compiling timers.c...
 C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/tasks.c(39): warning: In file included from...
 C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(64): warning: In file included from...
 ./RTE/RTOS\FreeRTOSConfig.h(352): warning: '__ARM_ARCH_7A__' is not defined, evaluates to 0 [-Wundef]
@@ -378,18 +403,18 @@ C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/tasks.c(
 15 warnings generated.
 compiling tasks.c...
 linking...
-Program Size: Code=25688 RO-data=1236 RW-data=8 ZI-data=17096  
-".\Objects\Lab1.axf" - 0 Error(s), 93 Warning(s).
+Program Size: Code=26048 RO-data=1236 RW-data=8 ZI-data=16400  
+".\Objects\Lab1.axf" - 0 Error(s), 101 Warning(s).
 
 <h2>Software Packages used:</h2>
 
 Package Vendor: ARM
-                https://www.keil.com/pack/ARM.CMSIS.6.0.0.pack
-                ARM.CMSIS.6.0.0
+                https://www.keil.com/pack/ARM.CMSIS.6.1.0.pack
+                ARM.CMSIS.6.1.0
                 CMSIS (Common Microcontroller Software Interface Standard)
    * Component: OS Tick Version: 1.0.1
    * Component: RTOS2 Version: 2.3.0
-   * Component: CORE Version: 6.0.0
+   * Component: CORE Version: 6.1.0
    * Component: SysTick Version: 1.0.5
 
 Package Vendor: ARM
@@ -404,10 +429,10 @@ Package Vendor: ARM
    * Component: FreeRTOS Variant: Cortex-M Version: 11.1.0
 
 Package Vendor: Keil
-                https://www.keil.com/pack/Keil.STM32L4xx_DFP.2.6.2.pack
-                Keil.STM32L4xx_DFP.2.6.2
+                https://www.keil.com/pack/Keil.STM32L4xx_DFP.2.7.0.pack
+                Keil.STM32L4xx_DFP.2.7.0
                 STMicroelectronics STM32L4 Series Device Support, Drivers and Examples
-   * Component: Startup Version: 1.3.1
+   * Component: Startup Version: 1.3.2
 
 <h2>Collection of Component include folders:</h2>
   .\RTE\RTOS
@@ -415,9 +440,9 @@ Package Vendor: Keil
   C:\Users\Admin\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\11.1.0\CMSIS\RTOS2\FreeRTOS\Include
   C:\Users\Admin\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\11.1.0\Source\include
   C:\Users\Admin\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\11.1.0\Source\portable\GCC\ARM_CM4F
-  C:\Users\Admin\AppData\Local\Arm\Packs\ARM\CMSIS\6.0.0\CMSIS\Core\Include
-  C:\Users\Admin\AppData\Local\Arm\Packs\ARM\CMSIS\6.0.0\CMSIS\RTOS2\Include
-  C:\Users\Admin\AppData\Local\Arm\Packs\Keil\STM32L4xx_DFP\2.6.2\Drivers\CMSIS\Device\ST\STM32L4xx\Include
+  C:\Users\Admin\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include
+  C:\Users\Admin\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\RTOS2\Include
+  C:\Users\Admin\AppData\Local\Arm\Packs\Keil\STM32L4xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include
 
 <h2>Collection of Component Files used:</h2>
 
@@ -431,14 +456,14 @@ Package Vendor: Keil
       Include file:  CMSIS\RTOS2\FreeRTOS\Config\FreeRTOSConfig.h
 
    * Component: ARM.FreeRTOS::RTOS:Core:Cortex-M:11.1.0
-      Source file:   Source\list.c
-      Include file:  Source\include\queue.h
       Include file:  Source\include\FreeRTOS.h
+      Include file:  Source\include\queue.h
       Include file:  Source\include\semphr.h
       Include file:  Source\include\task.h
+      Source file:   Source\list.c
       Source file:   Source\queue.c
-      Source file:   Source\tasks.c
       Source file:   Source\portable\GCC\ARM_CM4F\port.c
+      Source file:   Source\tasks.c
       Source file:   CMSIS\RTOS2\FreeRTOS\Source\freertos_evr.c
 
    * Component: ARM.FreeRTOS::RTOS:Event Groups:11.1.0
@@ -449,25 +474,25 @@ Package Vendor: Keil
       Source file:   Source\portable\MemMang\heap_4.c
 
    * Component: ARM.FreeRTOS::RTOS:Timers:11.1.0
-      Include file:  Source\include\timers.h
       Source file:   Source\timers.c
+      Include file:  Source\include\timers.h
 
-   * Component: ARM::CMSIS:CORE:6.0.0
+   * Component: ARM::CMSIS:CORE:6.1.0
 
    * Component: ARM::CMSIS:OS Tick:SysTick:1.0.5
       Source file:   CMSIS\RTOS2\Source\os_systick.c
 
    * Component: ARM::CMSIS:RTOS2:FreeRTOS:Cortex-M:11.1.0
       Include file:  CMSIS\RTOS2\FreeRTOS\Include\freertos_mpool.h
-      Source file:   CMSIS\RTOS2\FreeRTOS\Source\cmsis_os2.c
       Source file:   CMSIS\RTOS2\FreeRTOS\Source\clib_os.c
+      Source file:   CMSIS\RTOS2\FreeRTOS\Source\cmsis_os2.c
 
-   * Component: Keil::Device:Startup:1.3.1
+   * Component: Keil::Device:Startup:1.3.2
       Include file:  Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l4xx.h
       Source file:   MDK\Device\Source\ARM\STM32L4xx_DB_OPT.s
       Source file:   Drivers\CMSIS\Device\ST\STM32L4xx\Source\Templates\arm\startup_stm32l476xx.s
       Source file:   Drivers\CMSIS\Device\ST\STM32L4xx\Source\Templates\system_stm32l4xx.c
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

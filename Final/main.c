@@ -8,6 +8,8 @@
 QueueHandle_t xQueueLED = NULL;
 QueueHandle_t xQueueUART = NULL;
 QueueHandle_t xQueueSENSOR = NULL;
+TaskHandle_t LEDTaskHandle = NULL;
+TaskHandle_t BTNTaskHandle = NULL;
 TaskHandle_t sensorTaskHandle = NULL;
 
 const uint16_t sinLUT[] = {
@@ -56,27 +58,27 @@ int main (void) {
 		xTaskCreate(
 			LEDTask,
 			"LEDTask",
-			128,
+			32,
 			NULL,
 			1,
-			NULL
+			&LEDTaskHandle
 		);
 		
 		xTaskCreate(
 			BTNTask,
 			"BTNTask",
-			128,
+			32,
 			NULL,
 			1,
-			NULL
+			&BTNTaskHandle
 		);
 		
 		xTaskCreate(
 			SENSORTask,
 			"SENSORTask",
-			512,
+			1000,
 			NULL,
-			2,
+			1,
 			&sensorTaskHandle
 		);
 		
