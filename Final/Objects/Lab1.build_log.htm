@@ -28,88 +28,7 @@ Project File Date:  04/24/2025
 *** Using Compiler 'V6.16', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Rebuild target 'Target 1'
 compiling os_systick.c...
-main.c(1): warning: In file included from...
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(64): warning: In file included from...
-./RTE/RTOS\FreeRTOSConfig.h(352): warning: '__ARM_ARCH_7A__' is not defined, evaluates to 0 [-Wundef]
-#if (__ARM_ARCH_7A__ == 1U)
-     ^
-main.c(110): warning: 'return' will never be executed [-Wunreachable-code-return]
-        return 0;
-               ^
-main.c(1): warning: In file included from...
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(3236): warning: padding struct 'struct xSTATIC_QUEUE' with 1 byte to align 'uxDummy8' [-Wpadded]
-        UBaseType_t uxDummy8;
-                    ^
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(3213): warning: padding size of 'struct xSTATIC_QUEUE' with 3 bytes to alignment boundary [-Wpadded]
-typedef struct xSTATIC_QUEUE
-               ^
-4 warnings generated.
-compiling main.c...
-UART.c(4): warning: In file included from...
-./UART.h(3): warning: In file included from...
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(64): warning: In file included from...
-./RTE/RTOS\FreeRTOSConfig.h(352): warning: '__ARM_ARCH_7A__' is not defined, evaluates to 0 [-Wundef]
-#if (__ARM_ARCH_7A__ == 1U)
-     ^
-UART.c(170): warning: no newline at end of file [-Wnewline-eof]
-}
- ^
-2 warnings generated.
-compiling UART.c...
 assembling startup_stm32l476xx.s...
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/clib_os.c(26): warning: In file included from...
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(64): warning: In file included from...
-./RTE/RTOS\FreeRTOSConfig.h(352): warning: '__ARM_ARCH_7A__' is not defined, evaluates to 0 [-Wundef]
-#if (__ARM_ARCH_7A__ == 1U)
-     ^
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/clib_os.c(69): warning: '$' in identifier [-Wdollar-in-identifier-extension]
-extern void $Super$$_fp_init (void);
-            ^
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/clib_os.c(69): warning: '$' in identifier [-Wdollar-in-identifier-extension]
-extern void $Super$$_fp_init (void);
-                  ^
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/clib_os.c(69): warning: '$' in identifier [-Wdollar-in-identifier-extension]
-extern void $Super$$_fp_init (void);
-                   ^
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/clib_os.c(71): warning: '$' in identifier [-Wdollar-in-identifier-extension]
-void $Sub$$_fp_init (void);
-     ^
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/clib_os.c(71): warning: '$' in identifier [-Wdollar-in-identifier-extension]
-void $Sub$$_fp_init (void);
-         ^
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/clib_os.c(71): warning: '$' in identifier [-Wdollar-in-identifier-extension]
-void $Sub$$_fp_init (void);
-          ^
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/clib_os.c(72): warning: '$' in identifier [-Wdollar-in-identifier-extension]
-void $Sub$$_fp_init (void) {
-     ^
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/clib_os.c(72): warning: '$' in identifier [-Wdollar-in-identifier-extension]
-void $Sub$$_fp_init (void) {
-         ^
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/clib_os.c(72): warning: '$' in identifier [-Wdollar-in-identifier-extension]
-void $Sub$$_fp_init (void) {
-          ^
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/clib_os.c(73): warning: '$' in identifier [-Wdollar-in-identifier-extension]
-  $Super$$_fp_init();
-  ^
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/clib_os.c(73): warning: '$' in identifier [-Wdollar-in-identifier-extension]
-  $Super$$_fp_init();
-        ^
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/clib_os.c(73): warning: '$' in identifier [-Wdollar-in-identifier-extension]
-  $Super$$_fp_init();
-         ^
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/clib_os.c(139): warning: '__ARM_ARCH_7A__' is not defined, evaluates to 0 [-Wundef]
-#if (__ARM_ARCH_7A__ == 1U)
-     ^
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/clib_os.c(26): warning: In file included from...
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(3236): warning: padding struct 'struct xSTATIC_QUEUE' with 1 byte to align 'uxDummy8' [-Wpadded]
-        UBaseType_t uxDummy8;
-                    ^
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(3213): warning: padding size of 'struct xSTATIC_QUEUE' with 3 bytes to alignment boundary [-Wpadded]
-typedef struct xSTATIC_QUEUE
-               ^
-16 warnings generated.
-compiling clib_os.c...
 ourtask.c(1): warning: In file included from...
 ./ourtask.h(4): warning: In file included from...
 C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(64): warning: In file included from...
@@ -187,6 +106,87 @@ ourtask.c(457): warning: while loop has empty body [-Wempty-body]
 ourtask.c(457): note: put the semicolon on a separate line to silence this warning
 23 warnings generated.
 compiling ourtask.c...
+UART.c(4): warning: In file included from...
+./UART.h(3): warning: In file included from...
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(64): warning: In file included from...
+./RTE/RTOS\FreeRTOSConfig.h(352): warning: '__ARM_ARCH_7A__' is not defined, evaluates to 0 [-Wundef]
+#if (__ARM_ARCH_7A__ == 1U)
+     ^
+UART.c(170): warning: no newline at end of file [-Wnewline-eof]
+}
+ ^
+2 warnings generated.
+compiling UART.c...
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/clib_os.c(26): warning: In file included from...
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(64): warning: In file included from...
+./RTE/RTOS\FreeRTOSConfig.h(352): warning: '__ARM_ARCH_7A__' is not defined, evaluates to 0 [-Wundef]
+#if (__ARM_ARCH_7A__ == 1U)
+     ^
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/clib_os.c(69): warning: '$' in identifier [-Wdollar-in-identifier-extension]
+extern void $Super$$_fp_init (void);
+            ^
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/clib_os.c(69): warning: '$' in identifier [-Wdollar-in-identifier-extension]
+extern void $Super$$_fp_init (void);
+                  ^
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/clib_os.c(69): warning: '$' in identifier [-Wdollar-in-identifier-extension]
+extern void $Super$$_fp_init (void);
+                   ^
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/clib_os.c(71): warning: '$' in identifier [-Wdollar-in-identifier-extension]
+void $Sub$$_fp_init (void);
+     ^
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/clib_os.c(71): warning: '$' in identifier [-Wdollar-in-identifier-extension]
+void $Sub$$_fp_init (void);
+         ^
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/clib_os.c(71): warning: '$' in identifier [-Wdollar-in-identifier-extension]
+void $Sub$$_fp_init (void);
+          ^
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/clib_os.c(72): warning: '$' in identifier [-Wdollar-in-identifier-extension]
+void $Sub$$_fp_init (void) {
+     ^
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/clib_os.c(72): warning: '$' in identifier [-Wdollar-in-identifier-extension]
+void $Sub$$_fp_init (void) {
+         ^
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/clib_os.c(72): warning: '$' in identifier [-Wdollar-in-identifier-extension]
+void $Sub$$_fp_init (void) {
+          ^
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/clib_os.c(73): warning: '$' in identifier [-Wdollar-in-identifier-extension]
+  $Super$$_fp_init();
+  ^
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/clib_os.c(73): warning: '$' in identifier [-Wdollar-in-identifier-extension]
+  $Super$$_fp_init();
+        ^
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/clib_os.c(73): warning: '$' in identifier [-Wdollar-in-identifier-extension]
+  $Super$$_fp_init();
+         ^
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/clib_os.c(139): warning: '__ARM_ARCH_7A__' is not defined, evaluates to 0 [-Wundef]
+#if (__ARM_ARCH_7A__ == 1U)
+     ^
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/clib_os.c(26): warning: In file included from...
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(3236): warning: padding struct 'struct xSTATIC_QUEUE' with 1 byte to align 'uxDummy8' [-Wpadded]
+        UBaseType_t uxDummy8;
+                    ^
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(3213): warning: padding size of 'struct xSTATIC_QUEUE' with 3 bytes to alignment boundary [-Wpadded]
+typedef struct xSTATIC_QUEUE
+               ^
+16 warnings generated.
+compiling clib_os.c...
+main.c(1): warning: In file included from...
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(64): warning: In file included from...
+./RTE/RTOS\FreeRTOSConfig.h(352): warning: '__ARM_ARCH_7A__' is not defined, evaluates to 0 [-Wundef]
+#if (__ARM_ARCH_7A__ == 1U)
+     ^
+main.c(110): warning: 'return' will never be executed [-Wunreachable-code-return]
+        return 0;
+               ^
+main.c(1): warning: In file included from...
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(3236): warning: padding struct 'struct xSTATIC_QUEUE' with 1 byte to align 'uxDummy8' [-Wpadded]
+        UBaseType_t uxDummy8;
+                    ^
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(3213): warning: padding size of 'struct xSTATIC_QUEUE' with 3 bytes to alignment boundary [-Wpadded]
+typedef struct xSTATIC_QUEUE
+               ^
+4 warnings generated.
+compiling main.c...
 C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/cmsis_os2.c(29): warning: In file included from...
 C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(64): warning: In file included from...
 ./RTE/RTOS\FreeRTOSConfig.h(352): warning: '__ARM_ARCH_7A__' is not defined, evaluates to 0 [-Wundef]
@@ -228,20 +228,13 @@ typedef struct xSTATIC_QUEUE
                ^
 11 warnings generated.
 compiling cmsis_os2.c...
-compiling system_stm32l4xx.c...
 C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/CMSIS/RTOS2/FreeRTOS/Source/freertos_evr.c(25): warning: In file included from...
 ./RTE/RTOS\FreeRTOSConfig.h(352): warning: '__ARM_ARCH_7A__' is not defined, evaluates to 0 [-Wundef]
 #if (__ARM_ARCH_7A__ == 1U)
      ^
 1 warning generated.
 compiling freertos_evr.c...
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/list.c(37): warning: In file included from...
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(64): warning: In file included from...
-./RTE/RTOS\FreeRTOSConfig.h(352): warning: '__ARM_ARCH_7A__' is not defined, evaluates to 0 [-Wundef]
-#if (__ARM_ARCH_7A__ == 1U)
-     ^
-1 warning generated.
-compiling list.c...
+compiling system_stm32l4xx.c...
 C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/event_groups.c(38): warning: In file included from...
 C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(64): warning: In file included from...
 ./RTE/RTOS\FreeRTOSConfig.h(352): warning: '__ARM_ARCH_7A__' is not defined, evaluates to 0 [-Wundef]
@@ -262,6 +255,13 @@ C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/event_gr
                                       ^
 5 warnings generated.
 compiling event_groups.c...
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/list.c(37): warning: In file included from...
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(64): warning: In file included from...
+./RTE/RTOS\FreeRTOSConfig.h(352): warning: '__ARM_ARCH_7A__' is not defined, evaluates to 0 [-Wundef]
+#if (__ARM_ARCH_7A__ == 1U)
+     ^
+1 warning generated.
+compiling list.c...
 C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/portable/GCC/ARM_CM4F/port.c(34): warning: In file included from...
 C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(64): warning: In file included from...
 ./RTE/RTOS\FreeRTOSConfig.h(352): warning: '__ARM_ARCH_7A__' is not defined, evaluates to 0 [-Wundef]
@@ -294,37 +294,6 @@ C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/portable
                                                 ^
 6 warnings generated.
 compiling heap_4.c...
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/timers.c(37): warning: In file included from...
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(64): warning: In file included from...
-./RTE/RTOS\FreeRTOSConfig.h(352): warning: '__ARM_ARCH_7A__' is not defined, evaluates to 0 [-Wundef]
-#if (__ARM_ARCH_7A__ == 1U)
-     ^
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/timers.c(37): warning: In file included from...
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(3139): warning: padding size of 'struct xSTATIC_TCB' with 1 byte to alignment boundary [-Wpadded]
-typedef struct xSTATIC_TCB
-               ^
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/timers.c(83): warning: padding size of 'struct tmrTimerControl' with 3 bytes to alignment boundary [-Wpadded]
-    typedef struct tmrTimerControl                                               /* The old naming convention is used to prevent breaking kernel aware debuggers. */
-                   ^
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/timers.c(37): warning: In file included from...
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(3284): warning: padding size of 'struct xSTATIC_TIMER' with 3 bytes to alignment boundary [-Wpadded]
-typedef struct xSTATIC_TIMER
-               ^
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/timers.c(749): warning: function 'prvTimerTask' could be declared with attribute 'noreturn' [-Wmissing-noreturn]
-    {
-    ^
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/timers.c(828): warning: empty expression statement has no effect; remove unnecessary ';' to silence this warning [-Wextra-semi-stmt]
-                        taskYIELD_WITHIN_API();
-                                              ^
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/timers.c(37): warning: In file included from...
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(3236): warning: padding struct 'struct xSTATIC_QUEUE' with 1 byte to align 'uxDummy8' [-Wpadded]
-        UBaseType_t uxDummy8;
-                    ^
-C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(3213): warning: padding size of 'struct xSTATIC_QUEUE' with 3 bytes to alignment boundary [-Wpadded]
-typedef struct xSTATIC_QUEUE
-               ^
-8 warnings generated.
-compiling timers.c...
 C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/queue.c(37): warning: In file included from...
 C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(64): warning: In file included from...
 ./RTE/RTOS\FreeRTOSConfig.h(352): warning: '__ARM_ARCH_7A__' is not defined, evaluates to 0 [-Wundef]
@@ -375,6 +344,37 @@ C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/queue.c(
                                           ^
 15 warnings generated.
 compiling queue.c...
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/timers.c(37): warning: In file included from...
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(64): warning: In file included from...
+./RTE/RTOS\FreeRTOSConfig.h(352): warning: '__ARM_ARCH_7A__' is not defined, evaluates to 0 [-Wundef]
+#if (__ARM_ARCH_7A__ == 1U)
+     ^
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/timers.c(37): warning: In file included from...
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(3139): warning: padding size of 'struct xSTATIC_TCB' with 1 byte to alignment boundary [-Wpadded]
+typedef struct xSTATIC_TCB
+               ^
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/timers.c(83): warning: padding size of 'struct tmrTimerControl' with 3 bytes to alignment boundary [-Wpadded]
+    typedef struct tmrTimerControl                                               /* The old naming convention is used to prevent breaking kernel aware debuggers. */
+                   ^
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/timers.c(37): warning: In file included from...
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(3284): warning: padding size of 'struct xSTATIC_TIMER' with 3 bytes to alignment boundary [-Wpadded]
+typedef struct xSTATIC_TIMER
+               ^
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/timers.c(749): warning: function 'prvTimerTask' could be declared with attribute 'noreturn' [-Wmissing-noreturn]
+    {
+    ^
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/timers.c(828): warning: empty expression statement has no effect; remove unnecessary ';' to silence this warning [-Wextra-semi-stmt]
+                        taskYIELD_WITHIN_API();
+                                              ^
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/timers.c(37): warning: In file included from...
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(3236): warning: padding struct 'struct xSTATIC_QUEUE' with 1 byte to align 'uxDummy8' [-Wpadded]
+        UBaseType_t uxDummy8;
+                    ^
+C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(3213): warning: padding size of 'struct xSTATIC_QUEUE' with 3 bytes to alignment boundary [-Wpadded]
+typedef struct xSTATIC_QUEUE
+               ^
+8 warnings generated.
+compiling timers.c...
 C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/tasks.c(39): warning: In file included from...
 C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.1.0/Source/include\FreeRTOS.h(64): warning: In file included from...
 ./RTE/RTOS\FreeRTOSConfig.h(352): warning: '__ARM_ARCH_7A__' is not defined, evaluates to 0 [-Wundef]

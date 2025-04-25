@@ -112,7 +112,7 @@ void FREQTask (void *pvParameters) {
 				currNote = A3;
 			} else if (prox >= 300 && prox < 325) {
 				TIM4->ARR = 134;
-				currNote = A3;
+				currNote = As3;
 			} else if (prox >= 325 && prox < 350) {
 				TIM4->ARR = 126;
 				currNote = B3;
@@ -237,10 +237,10 @@ void VOLTask (void *pvParameters) {
 			} else if (prox >= 200 && prox < 225) {
 				scalar = 6;
 				currVol = V6;
-			} else if (prox >= 225 && prox < 300) {
+			} else if (prox >= 225 && prox < 450) {
 				scalar = 7;
 				currVol = V7;
-			} else if (prox >=  300) {
+			} else if (prox >=  450) {
 				scalar = 0;
 				currVol = V0;
 			} 
