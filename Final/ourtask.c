@@ -73,85 +73,89 @@ void FREQTask (void *pvParameters) {
 	Note currNote = NULL;
 	for ( ;; ) {
 		uint16_t prox;
-		//xSemaphoreTake(uartMutex, portMAX_DELAY);
-		if (UART3_Read2Bytes(&prox, TIMEOUT_DURATION, 0x55) == 0) {
+		
+		xSemaphoreTake(uartMutex, portMAX_DELAY);
+		int read_status = UART3_Read2Bytes(&prox, TIMEOUT_DURATION, 0x55);
+		xSemaphoreGive(uartMutex);
+		
+		if (read_status == 0) {
 
-			if (prox > 0 && prox < 50) {
+			if (prox > 0 && prox < 75) {
 				TIM4->ARR = 239;
 				currNote = C3;
-			} else if (prox >= 50 && prox < 75) {
+			} else if (prox >= 75 && prox < 100) {
 				TIM4->ARR = 225;
 				currNote = Cs3;
-			} else if (prox >= 75 && prox < 100) {
+			} else if (prox >= 100 && prox < 125) {
 				TIM4->ARR = 213;
 				currNote = D3;
-			} else if (prox >= 100 && prox < 125) {
+			} else if (prox >= 125 && prox < 150) {
 				TIM4->ARR = 201;
 				currNote = Ds3;
-			} else if (prox >= 125 && prox < 150) {
+			} else if (prox >= 150 && prox < 175) {
 				TIM4->ARR = 190;
 				currNote = E3;
-			} else if (prox >= 150 && prox < 175) {
+			} else if (prox >= 175 && prox < 200) {
 				TIM4->ARR = 179;
 				currNote = F3;
-			} else if (prox >= 175 && prox < 200) {
+			} else if (prox >= 200 && prox < 225) {
 				TIM4->ARR = 169;
 				currNote = Fs3;
-			} else if (prox >= 200 && prox < 225) {
+			} else if (prox >= 225 && prox < 250) {
 				TIM4->ARR = 159;
 				currNote = G3;
-			} else if (prox >= 225 && prox < 250) {
+			} else if (prox >= 250 && prox < 275) {
 				TIM4->ARR = 150;
 				currNote = Gs3;
-			} else if (prox >= 250 && prox < 275) {
+			} else if (prox >= 275 && prox < 300) {
 				TIM4->ARR = 142;
 				currNote = A3;
-			} else if (prox >= 275 && prox < 300) {
+			} else if (prox >= 300 && prox < 325) {
 				TIM4->ARR = 134;
 				currNote = A3;
-			} else if (prox >= 300 && prox < 325) {
+			} else if (prox >= 325 && prox < 350) {
 				TIM4->ARR = 126;
 				currNote = B3;
-			} else if (prox >= 325 && prox < 350) {
+			} else if (prox >= 350 && prox < 375) {
 				TIM4->ARR = 119;
 				currNote = C3;
-			} else if (prox >= 350 && prox < 375) {
+			} else if (prox >= 375 && prox < 400) {
 				TIM4->ARR = 113;
 				currNote = Cs4;
-			} else if (prox >= 375 && prox < 400) {
+			} else if (prox >= 400 && prox < 425) {
 				TIM4->ARR = 106;
 				currNote = D4;
-			} else if (prox >= 400 && prox < 425) {
+			} else if (prox >= 425 && prox < 450) {
 				TIM4->ARR = 100;
 				currNote = Ds4;
-			} else if (prox >= 425 && prox < 450) {
+			} else if (prox >= 450 && prox < 475) {
 				TIM4->ARR = 95;
 				currNote = E4;
-			} else if (prox >= 450 && prox < 475) {
+			} else if (prox >= 475 && prox < 500) {
 				TIM4->ARR = 89;
 				currNote = F4;
-			} else if (prox >= 475 && prox < 500) {
+			} else if (prox >= 500 && prox < 525) {
 				TIM4->ARR = 84;
 				currNote = Fs4;
-			} else if (prox >= 500 && prox < 525) {
+			} else if (prox >= 525 && prox < 550) {
 				TIM4->ARR = 80;
 				currNote = G4;
-			} else if (prox >= 525 && prox < 550) {
+			} else if (prox >= 550 && prox < 575) {
 				TIM4->ARR = 75;
 				currNote = Gs4;
-			} else if (prox >= 550 && prox < 575) {
+			} else if (prox >= 575 && prox < 600) {
 				TIM4->ARR = 71;
 				currNote = A4;
-			} else if (prox >= 575 && prox < 600) {
+			} else if (prox >= 600 && prox < 625) {
 				TIM4->ARR = 67;
 				currNote = As4;
-			} else if (prox >= 600 && prox < 625) {
+			} else if (prox >= 625 && prox < 650) {
 				TIM4->ARR = 63;
 				currNote = B4;
-			} else if (prox >= 625) {
+			} else if (prox >= 650) {
 				TIM4->ARR = 60;
 				currNote = C5;
-			} 
+			}
 			
 			if (currNote != lastNote) {
 				lastNote = currNote;
@@ -166,7 +170,31 @@ void FREQTask (void *pvParameters) {
 				
 				xSemaphoreGive(uartMutex);
 			}
+		} 
+		/*
+		else if (read_status == -1) {
+				xSemaphoreTake(uartMutex, portMAX_DELAY);
+
+				const char errorMsg[] = "freq read err b1\r\n";
+				for (int i = 0; errorMsg[i] != '\0'; i++) {
+						while (!(USART2->ISR & USART_ISR_TXE));
+						USART2->TDR = errorMsg[i];
+				}
+				
+				xSemaphoreGive(uartMutex);
+		} else if (read_status == -2) {
+				xSemaphoreTake(uartMutex, portMAX_DELAY);
+
+				const char errorMsg[] = "freq read err b2\r\n";
+				for (int i = 0; errorMsg[i] != '\0'; i++) {
+						while (!(USART2->ISR & USART_ISR_TXE));
+						USART2->TDR = errorMsg[i];
+				}
+				
+				xSemaphoreGive(uartMutex);
 		}
+		*/
+		
 		vTaskDelay(xDelay);
 		
 		//xSemaphoreGive(uartMutex);
@@ -181,31 +209,35 @@ void VOLTask (void *pvParameters) {
 		
 		uint16_t prox;
 		uint16_t scalar = 0;
-		//xSemaphoreTake(uartMutex, portMAX_DELAY);
-		if (UART1_Read2Bytes(&prox, TIMEOUT_DURATION, 0x55) == 0) {
+		
+		xSemaphoreTake(uartMutex, portMAX_DELAY);
+		int read_status = UART1_Read2Bytes(&prox, TIMEOUT_DURATION, 0x55);
+		xSemaphoreGive(uartMutex);
+		
+		if (read_status == 0) {
 
-			if (prox > 0 && prox < 50) {
+			if (prox > 0 && prox < 75) {
 				scalar = 0;
 				currVol = V0;
-			} else if (prox >= 50 && prox < 75) {
+			} else if (prox >= 75 && prox < 100) {
 				scalar = 1;
 				currVol = V1;
-			} else if (prox >= 75 && prox < 100) {
+			} else if (prox >= 100 && prox < 125) {
 				scalar = 2;
 				currVol = V2;
-			} else if (prox >= 100 && prox < 125) {
+			} else if (prox >= 125 && prox < 150) {
 				scalar = 3;
 				currVol = V3;
-			} else if (prox >= 125 && prox < 150) {
+			} else if (prox >= 150 && prox < 175) {
 				scalar = 4;
 				currVol = V4;
-			} else if (prox >= 150 && prox < 175) {
+			} else if (prox >= 175 && prox < 200) {
 				scalar = 5;
 				currVol = V5;
-			} else if (prox >= 175 && prox < 200) {
+			} else if (prox >= 200 && prox < 225) {
 				scalar = 6;
 				currVol = V6;
-			} else if (prox >= 200 && prox < 300) {
+			} else if (prox >= 225 && prox < 300) {
 				scalar = 7;
 				currVol = V7;
 			} else if (prox >=  300) {
@@ -229,7 +261,31 @@ void VOLTask (void *pvParameters) {
 				
 				xSemaphoreGive(uartMutex);
 			}
+		} 
+		/*
+		else if (read_status == -1) {
+				xSemaphoreTake(uartMutex, portMAX_DELAY);
+	
+				const char errorMsg[] = "vol read err b1\r\n";
+				for (int i = 0; errorMsg[i] != '\0'; i++) {
+						while (!(USART2->ISR & USART_ISR_TXE));
+						USART2->TDR = errorMsg[i];
+				}
+				
+				xSemaphoreGive(uartMutex);
+		} else if (read_status == -2) {
+				xSemaphoreTake(uartMutex, portMAX_DELAY);
+	
+				const char errorMsg[] = "vol read err b2\r\n";
+				for (int i = 0; errorMsg[i] != '\0'; i++) {
+						while (!(USART2->ISR & USART_ISR_TXE));
+						USART2->TDR = errorMsg[i];
+				}
+				
+				xSemaphoreGive(uartMutex);
 		}
+		*/
+		
 		vTaskDelay(xDelay);
 		//xSemaphoreGive(uartMutex);
 	}
@@ -342,6 +398,8 @@ void TIM4Setup() {
 }
 
 int UART3_Read2Bytes(uint16_t *outVal, int32_t timeoutLimit, char command) {
+		taskENTER_CRITICAL();
+	
     int32_t timeout = 0;
 
     // Clear any previous errors
@@ -352,27 +410,41 @@ int UART3_Read2Bytes(uint16_t *outVal, int32_t timeoutLimit, char command) {
 		// --- Send Command ---
 		while (!(USART3->ISR & USART_ISR_TXE));
 				USART3->TDR = command;
+		
+		while(!(USART3->ISR & USART_ISR_TC));
+		//volatile char flush = USART3->RDR;
+		
     // --- First Byte ---
     timeout = 0;
     while (!(USART3->ISR & USART_ISR_RXNE)) {
-        if (++timeout >= timeoutLimit) return -1;
+        if (++timeout >= timeoutLimit){
+					taskEXIT_CRITICAL();
+					return -1;
+				}
     }
     uint8_t msb = USART3->RDR;
 
     // --- Second Byte ---
     timeout = 0;
     while (!(USART3->ISR & USART_ISR_RXNE)) {
-        if (++timeout >= timeoutLimit) return -2;
+        if (++timeout >= timeoutLimit){
+					taskEXIT_CRITICAL();
+					return -2;
+				}
     }
     uint8_t lsb = USART3->RDR;
 
     *outVal = ((uint16_t)msb << 8) | lsb;
+		
+		taskEXIT_CRITICAL();
     return 0;
 }
 
 int UART1_Read2Bytes(uint16_t *outVal, int32_t timeoutLimit, char command) {
+		taskENTER_CRITICAL();
+	
     int32_t timeout = 0;
-
+		
     // Clear any previous errors
     if (USART1->ISR & (USART_ISR_ORE | USART_ISR_FE | USART_ISR_NE)) {
         volatile char flush = USART1->RDR;
@@ -380,21 +452,33 @@ int UART1_Read2Bytes(uint16_t *outVal, int32_t timeoutLimit, char command) {
     }
 		// --- Send Command ---
 		while (!(USART1->ISR & USART_ISR_TXE));
-				USART1->TDR = command;
+		USART1->TDR = command;
+		
+		while(!(USART1->ISR & USART_ISR_TC));
+		//volatile char flush = USART1->RDR;
+		
     // --- First Byte ---
     timeout = 0;
     while (!(USART1->ISR & USART_ISR_RXNE)) {
-        if (++timeout >= timeoutLimit) return -1;
+        if (++timeout >= timeoutLimit){
+					taskEXIT_CRITICAL();
+					return -1;
+				}
     }
     uint8_t msb = USART1->RDR;
 
     // --- Second Byte ---
     timeout = 0;
     while (!(USART1->ISR & USART_ISR_RXNE)) {
-        if (++timeout >= timeoutLimit) return -2;
+        if (++timeout >= timeoutLimit) {
+					taskEXIT_CRITICAL();
+					return -2;
+				}
     }
     uint8_t lsb = USART1->RDR;
 
     *outVal = ((uint16_t)msb << 8) | lsb;
+		
+		taskEXIT_CRITICAL();
     return 0;
 }
