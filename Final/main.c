@@ -2,15 +2,18 @@
 #include "ourtask.h"
 #include "task.h"
 #include "queue.h"
+#include "semphr.h"
 #include "stm32l476xx.h"
 #include "UART.h"
 
 QueueHandle_t xQueueLED = NULL;
-QueueHandle_t xQueueUART = NULL;
-QueueHandle_t xQueueSENSOR = NULL;
+QueueHandle_t xQueueVOL = NULL;
 TaskHandle_t LEDTaskHandle = NULL;
 TaskHandle_t BTNTaskHandle = NULL;
 TaskHandle_t sensorTaskHandle = NULL;
+TaskHandle_t FREQTaskHandle = NULL;
+SemaphoreHandle_t uartMutex = NULL;
+StaticSemaphore_t uartMutexBuffer;
 
 const uint16_t sinLUT[] = {
 		0x05DC,0x063E,0x069F,0x06FE,0x075B,0x07B3,0x0808,
@@ -50,10 +53,11 @@ int main (void) {
   
 	//create queues
 	xQueueLED = xQueueCreate(1, sizeof(int32_t));
-	xQueueUART = xQueueCreate(5, sizeof(char));
-	xQueueSENSOR = xQueueCreate(5, sizeof(char));
+	xQueueVOL = xQueueCreate(1, sizeof(uint16_t));
+	
+	uartMutex = xSemaphoreCreateMutexStatic(&uartMutexBuffer);
 
-	if ((xQueueLED != NULL) && (xQueueUART != NULL) && (xQueueSENSOR != NULL)) {
+	if ((xQueueLED != NULL) && (xQueueVOL != NULL) && (uartMutex != NULL)) {
 		//register tasks
 		xTaskCreate(
 			LEDTask,
@@ -74,17 +78,29 @@ int main (void) {
 		);
 		
 		xTaskCreate(
-			SENSORTask,
-			"SENSORTask",
-			1000,
+			FREQTask,
+			"FREQTask",
+			256,
 			NULL,
 			1,
-			&sensorTaskHandle
+			&FREQTaskHandle
 		);
 		
+		xTaskCreate(
+			VOLTask,
+			"VOLTask",
+			256,
+			NULL,
+			1,
+			NULL
+		);
+		
+		
 		//initialize queues
-		int LEDinit = 0;
-		xQueueSendToBack(xQueueLED, &LEDinit, pdMS_TO_TICKS(1));
+		int init = 0;
+		xQueueSendToBack(xQueueLED, &init, pdMS_TO_TICKS(1));
+		
+		xQueueSendToBack(xQueueVOL, &init, pdMS_TO_TICKS(1));
 		
 		//start scheduler
 		vTaskStartScheduler();

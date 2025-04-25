@@ -4,8 +4,6 @@
 #include "queue.h"
 #include <stdint.h>
 #include <stdio.h>
-extern QueueHandle_t xQueueUART;
-extern QueueHandle_t xQueueSENSOR;
 void USART_Init_PC (void);
 void USART_Init_US100 (void);
 void USART2_IRQHandler(void);

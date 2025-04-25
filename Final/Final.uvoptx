@@ -152,57 +152,105 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>122</LineNumber>
+          <LineNumber>148</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134224330</Address>
+          <Address>134222864</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\ourtask.c</Filename>
+          <Filename>.\UART.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Lab1\ourtask.c\122</Expression>
+          <Expression>\\Lab1\UART.c\148</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>120</LineNumber>
+          <LineNumber>141</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134224306</Address>
+          <Address>134222840</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\ourtask.c</Filename>
+          <Filename>.\UART.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Lab1\ourtask.c\120</Expression>
+          <Expression>\\Lab1\UART.c\141</Expression>
         </Bp>
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>113</LineNumber>
+          <LineNumber>139</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134224278</Address>
+          <Address>134222832</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\ourtask.c</Filename>
+          <Filename>.\UART.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Lab1\ourtask.c\113</Expression>
+          <Expression>\\Lab1\UART.c\139</Expression>
         </Bp>
         <Bp>
           <Number>3</Number>
           <Type>0</Type>
-          <LineNumber>111</LineNumber>
+          <LineNumber>107</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134224252</Address>
+          <Address>134222724</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\UART.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Lab1\UART.c\107</Expression>
+        </Bp>
+        <Bp>
+          <Number>4</Number>
+          <Type>0</Type>
+          <LineNumber>88</LineNumber>
+          <EnabledFlag>0</EnabledFlag>
+          <Address>134222648</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\UART.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Lab1\UART.c\88</Expression>
+        </Bp>
+        <Bp>
+          <Number>5</Number>
+          <Type>0</Type>
+          <LineNumber>82</LineNumber>
+          <EnabledFlag>0</EnabledFlag>
+          <Address>134222630</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\UART.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Lab1\UART.c\82</Expression>
+        </Bp>
+        <Bp>
+          <Number>6</Number>
+          <Type>0</Type>
+          <LineNumber>125</LineNumber>
+          <EnabledFlag>0</EnabledFlag>
+          <Address>134219842</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -211,14 +259,126 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>.\ourtask.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Lab1\ourtask.c\111</Expression>
+          <Expression>\\Lab1\ourtask.c\125</Expression>
         </Bp>
         <Bp>
-          <Number>4</Number>
+          <Number>7</Number>
+          <Type>0</Type>
+          <LineNumber>123</LineNumber>
+          <EnabledFlag>0</EnabledFlag>
+          <Address>134219802</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\ourtask.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Lab1\ourtask.c\123</Expression>
+        </Bp>
+        <Bp>
+          <Number>8</Number>
+          <Type>0</Type>
+          <LineNumber>116</LineNumber>
+          <EnabledFlag>0</EnabledFlag>
+          <Address>134219710</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\ourtask.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Lab1\ourtask.c\116</Expression>
+        </Bp>
+        <Bp>
+          <Number>9</Number>
+          <Type>0</Type>
+          <LineNumber>114</LineNumber>
+          <EnabledFlag>0</EnabledFlag>
+          <Address>134219670</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\ourtask.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Lab1\ourtask.c\114</Expression>
+        </Bp>
+        <Bp>
+          <Number>10</Number>
+          <Type>0</Type>
+          <LineNumber>92</LineNumber>
+          <EnabledFlag>0</EnabledFlag>
+          <Address>134219376</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\ourtask.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Lab1\ourtask.c\92</Expression>
+        </Bp>
+        <Bp>
+          <Number>11</Number>
+          <Type>0</Type>
+          <LineNumber>91</LineNumber>
+          <EnabledFlag>0</EnabledFlag>
+          <Address>134219372</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\ourtask.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Lab1\ourtask.c\91</Expression>
+        </Bp>
+        <Bp>
+          <Number>12</Number>
+          <Type>0</Type>
+          <LineNumber>90</LineNumber>
+          <EnabledFlag>0</EnabledFlag>
+          <Address>134219340</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\ourtask.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Lab1\ourtask.c\90</Expression>
+        </Bp>
+        <Bp>
+          <Number>13</Number>
+          <Type>0</Type>
+          <LineNumber>100</LineNumber>
+          <EnabledFlag>0</EnabledFlag>
+          <Address>134224492</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\main.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Lab1\main.c\100</Expression>
+        </Bp>
+        <Bp>
+          <Number>14</Number>
           <Type>0</Type>
           <LineNumber>89</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134224092</Address>
+          <Address>134219336</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -230,11 +390,11 @@
           <Expression>\\Lab1\ourtask.c\89</Expression>
         </Bp>
         <Bp>
-          <Number>5</Number>
+          <Number>15</Number>
           <Type>0</Type>
           <LineNumber>88</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134224088</Address>
+          <Address>134219332</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -246,11 +406,11 @@
           <Expression>\\Lab1\ourtask.c\88</Expression>
         </Bp>
         <Bp>
-          <Number>6</Number>
+          <Number>16</Number>
           <Type>0</Type>
-          <LineNumber>87</LineNumber>
-          <EnabledFlag>0</EnabledFlag>
-          <Address>134224074</Address>
+          <LineNumber>244</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134221478</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -259,90 +419,42 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>.\ourtask.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Lab1\ourtask.c\87</Expression>
+          <Expression>\\Lab1\ourtask.c\244</Expression>
         </Bp>
         <Bp>
-          <Number>7</Number>
+          <Number>17</Number>
           <Type>0</Type>
-          <LineNumber>86</LineNumber>
+          <LineNumber>83</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134224068</Address>
+          <Address>0</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\ourtask.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\Lab1\ourtask.c\86</Expression>
-        </Bp>
-        <Bp>
-          <Number>8</Number>
-          <Type>0</Type>
-          <LineNumber>109</LineNumber>
-          <EnabledFlag>0</EnabledFlag>
-          <Address>134226452</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
+          <BreakIfRCount>0</BreakIfRCount>
           <Filename>.\UART.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Lab1\UART.c\109</Expression>
+          <Expression></Expression>
         </Bp>
         <Bp>
-          <Number>9</Number>
+          <Number>18</Number>
           <Type>0</Type>
-          <LineNumber>85</LineNumber>
+          <LineNumber>106</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134224094</Address>
+          <Address>0</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\ourtask.c</Filename>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>.\UART.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\\ourtask.c\85</Expression>
+          <Expression></Expression>
         </Bp>
         <Bp>
-          <Number>10</Number>
-          <Type>0</Type>
-          <LineNumber>86</LineNumber>
-          <EnabledFlag>0</EnabledFlag>
-          <Address>134227656</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\main.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\Lab1\main.c\86</Expression>
-        </Bp>
-        <Bp>
-          <Number>11</Number>
-          <Type>0</Type>
-          <LineNumber>188</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134225564</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\ourtask.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\Lab1\ourtask.c\188</Expression>
-        </Bp>
-        <Bp>
-          <Number>12</Number>
+          <Number>19</Number>
           <Type>0</Type>
           <LineNumber>108</LineNumber>
           <EnabledFlag>0</EnabledFlag>
@@ -358,9 +470,9 @@
           <Expression></Expression>
         </Bp>
         <Bp>
-          <Number>13</Number>
+          <Number>20</Number>
           <Type>0</Type>
-          <LineNumber>127</LineNumber>
+          <LineNumber>129</LineNumber>
           <EnabledFlag>0</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -374,9 +486,73 @@
           <Expression></Expression>
         </Bp>
         <Bp>
-          <Number>14</Number>
+          <Number>21</Number>
           <Type>0</Type>
-          <LineNumber>84</LineNumber>
+          <LineNumber>140</LineNumber>
+          <EnabledFlag>0</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>.\UART.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
+        </Bp>
+        <Bp>
+          <Number>22</Number>
+          <Type>0</Type>
+          <LineNumber>142</LineNumber>
+          <EnabledFlag>0</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>.\UART.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
+        </Bp>
+        <Bp>
+          <Number>23</Number>
+          <Type>0</Type>
+          <LineNumber>149</LineNumber>
+          <EnabledFlag>0</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>.\UART.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
+        </Bp>
+        <Bp>
+          <Number>24</Number>
+          <Type>0</Type>
+          <LineNumber>150</LineNumber>
+          <EnabledFlag>0</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>.\UART.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
+        </Bp>
+        <Bp>
+          <Number>25</Number>
+          <Type>0</Type>
+          <LineNumber>78</LineNumber>
           <EnabledFlag>0</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -390,9 +566,25 @@
           <Expression></Expression>
         </Bp>
         <Bp>
-          <Number>15</Number>
+          <Number>26</Number>
           <Type>0</Type>
-          <LineNumber>218</LineNumber>
+          <LineNumber>102</LineNumber>
+          <EnabledFlag>0</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>.\main.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
+        </Bp>
+        <Bp>
+          <Number>27</Number>
+          <Type>0</Type>
+          <LineNumber>245</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -406,9 +598,25 @@
           <Expression></Expression>
         </Bp>
         <Bp>
-          <Number>16</Number>
+          <Number>28</Number>
           <Type>0</Type>
-          <LineNumber>90</LineNumber>
+          <LineNumber>246</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>.\ourtask.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
+        </Bp>
+        <Bp>
+          <Number>29</Number>
+          <Type>0</Type>
+          <LineNumber>93</LineNumber>
           <EnabledFlag>0</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -422,9 +630,9 @@
           <Expression></Expression>
         </Bp>
         <Bp>
-          <Number>17</Number>
+          <Number>30</Number>
           <Type>0</Type>
-          <LineNumber>131</LineNumber>
+          <LineNumber>115</LineNumber>
           <EnabledFlag>0</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -438,9 +646,9 @@
           <Expression></Expression>
         </Bp>
         <Bp>
-          <Number>18</Number>
+          <Number>31</Number>
           <Type>0</Type>
-          <LineNumber>141</LineNumber>
+          <LineNumber>117</LineNumber>
           <EnabledFlag>0</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -454,9 +662,9 @@
           <Expression></Expression>
         </Bp>
         <Bp>
-          <Number>19</Number>
+          <Number>32</Number>
           <Type>0</Type>
-          <LineNumber>143</LineNumber>
+          <LineNumber>124</LineNumber>
           <EnabledFlag>0</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -470,9 +678,9 @@
           <Expression></Expression>
         </Bp>
         <Bp>
-          <Number>20</Number>
+          <Number>33</Number>
           <Type>0</Type>
-          <LineNumber>150</LineNumber>
+          <LineNumber>126</LineNumber>
           <EnabledFlag>0</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -486,9 +694,9 @@
           <Expression></Expression>
         </Bp>
         <Bp>
-          <Number>21</Number>
+          <Number>34</Number>
           <Type>0</Type>
-          <LineNumber>152</LineNumber>
+          <LineNumber>236</LineNumber>
           <EnabledFlag>0</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>

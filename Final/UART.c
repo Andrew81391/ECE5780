@@ -5,9 +5,7 @@
 #include "FreeRTOS.h"
 #include "queue.h"
 
-extern QueueHandle_t xQueueUART;
-extern QueueHandle_t xQueueSENSOR;
-
+/*
 void USART2_IRQHandler(void){
 	if ((USART2->ISR & USART_ISR_RXNE)){
 		char note = (char)USART2->RDR;
@@ -21,7 +19,7 @@ void USART2_IRQHandler(void){
 		//}
 	}
 }
-
+*/
 
 void USART_Init_PC (void) { 
 	//set PA2,PA3 to alt function
@@ -126,7 +124,7 @@ void USART_Init_PC (void) {
 	USART1->CR1 &= ~USART_CR1_OVER8; 
 	// Set Baud rate to 9600 using APB frequency (Be MHz) for usart2
 	// See Example 1 in Section 22.1.2 
-	USART2->BRR = 0x683; 
+	USART2->BRR = 0x341; 
 	// Set Baud rate to 9600 using APB frequency (Be MHz) for usart3
 	// See Example 1 in Section 22.1.2 
 	USART3->BRR = 0x683; 

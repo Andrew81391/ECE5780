@@ -3,18 +3,32 @@
 #include "FreeRTOS.h"
 #include "queue.h"
 #include "task.h"
+#include "semphr.h"
 #include <stdio.h>
-#define TIMEOUT_DURATION 50000
+#define TIMEOUT_DURATION 5000
 
 
 extern QueueHandle_t xQueueLED;
 extern QueueHandle_t xQueueUART;
-extern QueueHandle_t xQueueSENSOR;
+extern QueueHandle_t xQueueVOL;
 extern TaskHandle_t LEDTaskHandle;
 extern TaskHandle_t BTNTaskHandle;
 extern TaskHandle_t sensorTaskHandle;
+extern TaskHandle_t FREQTaskHandle;
+extern SemaphoreHandle_t uartMutex;
+extern StaticSemaphore_t uartMutexBuffer;
 extern const uint16_t sinLUT[];
+static uint16_t global_scalar;
 
+static const char* note_names[] = {
+    "C3\r\n", "C#3\r\n", "D3\r\n", "D#3\r\n", "E3\r\n", "F3\r\n", "F#3\r\n", "G3\r\n", "G#3\r\n", "A3\r\n", "A#3\r\n", "B3\r\n",
+    "C4\r\n", "C#4\r\n", "D4\r\n", "D#4\r\n", "E4\r\n", "F4\r\n", "F#4\r\n", "G4\r\n", "G#4\r\n", "A4\r\n", "A#4\r\n", "B4\r\n",
+    "C5\r\n"
+};
+
+static const char* vol_names[] = {
+	"Vol 0\r\n", "Vol 1\r\n", "Vol 2\r\n", "Vol 3\r\n", "Vol 4\r\n", "Vol 5\r\n", "Vol 6\r\n", "Vol 7\r\n"
+};
 
 void LEDTask (void *pvParameters) {
 	for ( ;; ) {
@@ -53,191 +67,191 @@ void BTNTask (void *pvParameters) {
 	}
 }
 
-void SENSORTask (void *pvParameters) {
+void FREQTask (void *pvParameters) {
+	const TickType_t xDelay = 40/portTICK_PERIOD_MS;
+	Note lastNote = NULL;
+	Note currNote = NULL;
 	for ( ;; ) {
-		char com;
-		char timeout_flag = 0;
-		int32_t timeout = 0;
-		BaseType_t status = xQueueReceive(xQueueSENSOR, &com, 0);
-		char temp;
-		char tempString[15]="balls";
-		int prox;
-		char proxString[15]="NOOO";
-		if (status == pdPASS) {
-			if (com == 't') {
-				timeout=0;
-				while (!(USART3->ISR & USART_ISR_TXE));
-				USART3->TDR = 0x50;
-				//for (volatile int i =0; i<500; i++);
-				while (!(USART3->ISR & USART_ISR_RXNE)){
-					timeout++;
-					if (timeout==TIMEOUT_DURATION){
-						timeout_flag=1;
-						break;
-					}
-				}
-				if (timeout_flag==0) {
-					timeout=0;
-					temp = ((char)USART3->RDR)-45;
-					temp = (char)((9.0/5.0) * temp + 27);
-					
-					//sprintf(tempString, "%d F\r\n", temp);
-					for (int i=0; tempString[i] != NULL; i++) {
-						while ((USART2->ISR & USART_ISR_TXE)!=USART_ISR_TXE){
-							timeout++;
-							if (timeout==TIMEOUT_DURATION){
-								timeout_flag=1;
-								break;
-							}
-						}
-						if (timeout_flag == 0){
-							USART2->TDR = tempString[i];
-						}
-					}
-				}
-			}
-			else if (com=='p') {
-				
-				uint16_t proxRaw;
-				if (UART3_Read2Bytes(&proxRaw, TIMEOUT_DURATION, 0x55) == 0) {
-						int proxInches = proxRaw / 25.4;
+		uint16_t prox;
+		//xSemaphoreTake(uartMutex, portMAX_DELAY);
+		if (UART3_Read2Bytes(&prox, TIMEOUT_DURATION, 0x55) == 0) {
 
-						const char msg[] = "Distance: ";
-						for (int i = 0; msg[i] != '\0'; i++) {
-								while (!(USART2->ISR & USART_ISR_TXE));
-								USART2->TDR = msg[i];
-						}
-
-						// Convert and print value (you can improve this later)
-						char buf[10];
-						int len = sprintf(buf, "%d\r\n", proxInches);
-						for (int i = 0; i < len; i++) {
-								while (!(USART2->ISR & USART_ISR_TXE));
-								USART2->TDR = buf[i];
-						}
-				} else {
-						const char errorMsg[] = "UART read error\r\n";
-						for (int i = 0; errorMsg[i] != '\0'; i++) {
-								while (!(USART2->ISR & USART_ISR_TXE));
-								USART2->TDR = errorMsg[i];
-						}
+			if (prox > 0 && prox < 50) {
+				TIM4->ARR = 239;
+				currNote = C3;
+			} else if (prox >= 50 && prox < 75) {
+				TIM4->ARR = 225;
+				currNote = Cs3;
+			} else if (prox >= 75 && prox < 100) {
+				TIM4->ARR = 213;
+				currNote = D3;
+			} else if (prox >= 100 && prox < 125) {
+				TIM4->ARR = 201;
+				currNote = Ds3;
+			} else if (prox >= 125 && prox < 150) {
+				TIM4->ARR = 190;
+				currNote = E3;
+			} else if (prox >= 150 && prox < 175) {
+				TIM4->ARR = 179;
+				currNote = F3;
+			} else if (prox >= 175 && prox < 200) {
+				TIM4->ARR = 169;
+				currNote = Fs3;
+			} else if (prox >= 200 && prox < 225) {
+				TIM4->ARR = 159;
+				currNote = G3;
+			} else if (prox >= 225 && prox < 250) {
+				TIM4->ARR = 150;
+				currNote = Gs3;
+			} else if (prox >= 250 && prox < 275) {
+				TIM4->ARR = 142;
+				currNote = A3;
+			} else if (prox >= 275 && prox < 300) {
+				TIM4->ARR = 134;
+				currNote = A3;
+			} else if (prox >= 300 && prox < 325) {
+				TIM4->ARR = 126;
+				currNote = B3;
+			} else if (prox >= 325 && prox < 350) {
+				TIM4->ARR = 119;
+				currNote = C3;
+			} else if (prox >= 350 && prox < 375) {
+				TIM4->ARR = 113;
+				currNote = Cs4;
+			} else if (prox >= 375 && prox < 400) {
+				TIM4->ARR = 106;
+				currNote = D4;
+			} else if (prox >= 400 && prox < 425) {
+				TIM4->ARR = 100;
+				currNote = Ds4;
+			} else if (prox >= 425 && prox < 450) {
+				TIM4->ARR = 95;
+				currNote = E4;
+			} else if (prox >= 450 && prox < 475) {
+				TIM4->ARR = 89;
+				currNote = F4;
+			} else if (prox >= 475 && prox < 500) {
+				TIM4->ARR = 84;
+				currNote = Fs4;
+			} else if (prox >= 500 && prox < 525) {
+				TIM4->ARR = 80;
+				currNote = G4;
+			} else if (prox >= 525 && prox < 550) {
+				TIM4->ARR = 75;
+				currNote = Gs4;
+			} else if (prox >= 550 && prox < 575) {
+				TIM4->ARR = 71;
+				currNote = A4;
+			} else if (prox >= 575 && prox < 600) {
+				TIM4->ARR = 67;
+				currNote = As4;
+			} else if (prox >= 600 && prox < 625) {
+				TIM4->ARR = 63;
+				currNote = B4;
+			} else if (prox >= 625) {
+				TIM4->ARR = 60;
+				currNote = C5;
+			} 
+			
+			if (currNote != lastNote) {
+				lastNote = currNote;
+				
+				xSemaphoreTake(uartMutex, portMAX_DELAY);
+				
+				const char* note = note_names[currNote];
+				for (int i = 0; note[i] != '\0'; i++) {
+						while (!(USART2->ISR & USART_ISR_TXE));
+						USART2->TDR = note[i];
 				}
 				
-				
-				
-//				timeout=0;
-//				while (!(USART3->ISR & USART_ISR_TXE));
-//				USART3->TDR = 0x55;
-//				//for (volatile int i =0; i<500; i++);
-//				while (!(USART3->ISR & USART_ISR_RXNE)){
-//					timeout++;
-//					if (timeout==TIMEOUT_DURATION){
-//						timeout_flag=1;
-//						break;
-//					}
-//				}
-//				if (timeout_flag==0){
-//					timeout=0;
-//					prox = (USART3->RDR) << 8;
-//					while (!(USART3->ISR & USART_ISR_RXNE)){
-//						timeout++;
-//						if (timeout == TIMEOUT_DURATION){
-//							timeout_flag=1;
-//							break;
-//						}
-//						
-//					}
-//					if (timeout_flag==0){
-//						timeout=0;
-//						prox |= USART3->RDR;
-//						//prox = (int)(prox/25.4);
-//						//sprintf(proxString, "%d mm\r\n", prox);
-//						taskENTER_CRITICAL();
-//						for (int i=0; proxString[i] != NULL; i++) {
-//							while ((USART2->ISR & USART_ISR_TXE)!=USART_ISR_TXE){
-//								timeout++;
-//								if (timeout == TIMEOUT_DURATION) {
-//									timeout_flag = 1;
-//									break;
-//								}
-//							}
-//							if (timeout_flag == 0){
-//								USART2->TDR = proxString[i];
-//							}
-//						}
-//						taskEXIT_CRITICAL();
-//					}
-//				}
+				xSemaphoreGive(uartMutex);
 			}
 		}
+		vTaskDelay(xDelay);
+		
+		//xSemaphoreGive(uartMutex);
+	}
+}
+
+void VOLTask (void *pvParameters) {
+	const TickType_t xDelay = 40/portTICK_PERIOD_MS;
+	Volume lastVol = NULL;
+	Volume currVol = NULL;
+	for ( ;; ) {
+		
+		uint16_t prox;
+		uint16_t scalar = 0;
+		//xSemaphoreTake(uartMutex, portMAX_DELAY);
+		if (UART1_Read2Bytes(&prox, TIMEOUT_DURATION, 0x55) == 0) {
+
+			if (prox > 0 && prox < 50) {
+				scalar = 0;
+				currVol = V0;
+			} else if (prox >= 50 && prox < 75) {
+				scalar = 1;
+				currVol = V1;
+			} else if (prox >= 75 && prox < 100) {
+				scalar = 2;
+				currVol = V2;
+			} else if (prox >= 100 && prox < 125) {
+				scalar = 3;
+				currVol = V3;
+			} else if (prox >= 125 && prox < 150) {
+				scalar = 4;
+				currVol = V4;
+			} else if (prox >= 150 && prox < 175) {
+				scalar = 5;
+				currVol = V5;
+			} else if (prox >= 175 && prox < 200) {
+				scalar = 6;
+				currVol = V6;
+			} else if (prox >= 200 && prox < 300) {
+				scalar = 7;
+				currVol = V7;
+			} else if (prox >=  300) {
+				scalar = 0;
+				currVol = V0;
+			} 
+			
+			if (currVol != lastVol) {
+				lastVol = currVol;
+				
+				//xQueueOverwrite(xQueueVOL, &scalar);
+				global_scalar = scalar;
+				
+				xSemaphoreTake(uartMutex, portMAX_DELAY);
+				
+				const char* vol = vol_names[currVol];
+				for (int i = 0; vol[i] != '\0'; i++) {
+						while (!(USART2->ISR & USART_ISR_TXE));
+						USART2->TDR = vol[i];
+				}
+				
+				xSemaphoreGive(uartMutex);
+			}
+		}
+		vTaskDelay(xDelay);
+		//xSemaphoreGive(uartMutex);
 	}
 }
 
 void TIM4_IRQHandler() {
-	//eTaskState sensorTaskState = 0x10;
-	UBaseType_t LEDStackLeft;
-	UBaseType_t BTNStackLeft;
-	UBaseType_t sensorStackLeft;
 	static int32_t index = 0;
 	if ((TIM4->SR & TIM_SR_CC1IF) != 0) {	
-		BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-		//get note from uart queue
-		if (uxQueueMessagesWaitingFromISR(xQueueUART) != 0) {
-			char note;
-			xQueueReceiveFromISR(xQueueUART, &note, 0);
-			switch (note) {
-				case 'a':
-					TIM4->ARR = 141;
-					break;
-				case 'b':
-					TIM4->ARR = 126;
-					break;
-				case 'c':
-					TIM4->ARR = 118;
-					break;
-				case 'd':
-					TIM4->ARR = 105;
-					break;
-				case 'e':
-					TIM4->ARR = 94;
-					break;
-				case 'f':
-					TIM4->ARR = 88;
-					break;
-				case 'g':
-					TIM4->ARR = 79;
-					break;
-				case 'h':
-					TIM4->ARR = 70;
-					break;
-				case 's':
-					//sensorTaskState = eTaskGetState(sensorTaskHandle);
-					LEDStackLeft = uxTaskGetStackHighWaterMark(LEDTaskHandle);
-					BTNStackLeft = uxTaskGetStackHighWaterMark(BTNTaskHandle);
-					sensorStackLeft = uxTaskGetStackHighWaterMark(sensorTaskHandle);
-					break;
-				case 't': {
-					xQueueSendToBackFromISR(xQueueSENSOR, &note, &xHigherPriorityTaskWoken);
-					portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
-					break;
-				}
-				case 'p': {
-					xQueueSendToBackFromISR(xQueueSENSOR, &note, &xHigherPriorityTaskWoken);
-					portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
-					break;
-				}
-			}	
-		}
 		
+		//uint16_t scalar;
+		//BaseType_t status1 = xQueuePeekFromISR(xQueueVOL, &scalar);
 		
 		int32_t LEDState;
-		BaseType_t status1 = xQueuePeekFromISR(xQueueLED, &LEDState);
+		BaseType_t status2 = xQueuePeekFromISR(xQueueLED, &LEDState);
 		
-		if (status1 == pdPASS){
+		if (status2 == pdPASS){
 			//set DAC output according to the lookup table
-			DAC->DHR12R1 &= 0xFFFFF000;
-			DAC->DHR12R1 |= sinLUT[index];
-			DAC->SWTRIGR |= DAC_SWTRIGR_SWTRIG1;
+			if (LEDState && global_scalar <= 7) {
+				DAC->DHR12R1 &= 0xFFFFF000;
+				DAC->DHR12R1 |= (((sinLUT[index])*global_scalar)/7)&0x00000FFF;
+				DAC->SWTRIGR |= DAC_SWTRIGR_SWTRIG1;
+			}
 			
 			//increment the lookup table index
 			if (LEDState) {
@@ -351,6 +365,35 @@ int UART3_Read2Bytes(uint16_t *outVal, int32_t timeoutLimit, char command) {
         if (++timeout >= timeoutLimit) return -2;
     }
     uint8_t lsb = USART3->RDR;
+
+    *outVal = ((uint16_t)msb << 8) | lsb;
+    return 0;
+}
+
+int UART1_Read2Bytes(uint16_t *outVal, int32_t timeoutLimit, char command) {
+    int32_t timeout = 0;
+
+    // Clear any previous errors
+    if (USART1->ISR & (USART_ISR_ORE | USART_ISR_FE | USART_ISR_NE)) {
+        volatile char flush = USART1->RDR;
+        USART1->ICR |= (USART_ICR_ORECF | USART_ICR_FECF | USART_ICR_NCF);
+    }
+		// --- Send Command ---
+		while (!(USART1->ISR & USART_ISR_TXE));
+				USART1->TDR = command;
+    // --- First Byte ---
+    timeout = 0;
+    while (!(USART1->ISR & USART_ISR_RXNE)) {
+        if (++timeout >= timeoutLimit) return -1;
+    }
+    uint8_t msb = USART1->RDR;
+
+    // --- Second Byte ---
+    timeout = 0;
+    while (!(USART1->ISR & USART_ISR_RXNE)) {
+        if (++timeout >= timeoutLimit) return -2;
+    }
+    uint8_t lsb = USART1->RDR;
 
     *outVal = ((uint16_t)msb << 8) | lsb;
     return 0;
